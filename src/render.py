@@ -95,8 +95,15 @@ def render_html(qid: str) -> tuple[Path, Path, int]:
         "abs_screenshots": abs_screenshots,
     }
 
-    print_html = env.get_template("print_a4.html.j2").render(**ctx)
-    tl_html = env.get_template("tl_vertical.html.j2").render(**ctx)
+    if q.id == "00":
+        print_template_name = "print_a4_manifeste.html.j2"
+        tl_template_name = "tl_vertical_manifeste.html.j2"
+    else:
+        print_template_name = "print_a4.html.j2"
+        tl_template_name = "tl_vertical.html.j2"
+
+    print_html = env.get_template(print_template_name).render(**ctx)
+    tl_html = env.get_template(tl_template_name).render(**ctx)
 
     print_path = OUTPUT_PDF_DIR / f"{qid}_print_v{version}.html"
     tl_path = OUTPUT_TL_DIR / f"{qid}_tl_v{version}.html"

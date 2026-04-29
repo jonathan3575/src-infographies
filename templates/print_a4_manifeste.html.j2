@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{{ q.id }} — {{ q.titre }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --src-navy: #1E2D3D;
+    --action: #00A890;
+    --critical: #C48F1A;
+    --passive: #B8BEC7;
+    --cream: #F8F6F1;
+    --text: #0E1117;
+    --muted-text: #5B6470;
+    --border: #E5E2DB;
+
+    --title-size: 56pt;
+    --body-size: 10pt;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: 1.35;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  /* ZONE 1 — HEADER (bandeau navy : logo + MANIFESTE label) */
+  [data-zone="header"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 2mm 4mm;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4mm;
+    align-items: center;
+  }
+  .logo-chip {
+    background: var(--cream);
+    padding: 1.5mm;
+    border-radius: 1.5mm;
+    display: flex;
+  }
+  .logo {
+    width: 18mm;
+    height: 18mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .header-spacer { flex: 1; }
+  .manifeste-tag {
+    font-family: var(--font-mono);
+    font-size: 12pt;
+    color: var(--passive);
+    letter-spacing: 4pt;
+    text-transform: uppercase;
+  }
+
+  /* TITLE BLOCK — La SRC en 12 planches */
+  .title-block {
+    padding: 1mm 0 0 0;
+  }
+  .manifeste-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    color: var(--src-navy);
+    letter-spacing: 0.5pt;
+    line-height: 0.95;
+  }
+  .manifeste-subtitle {
+    margin: 0.5mm 0 0 0;
+    font-family: var(--font-body);
+    font-size: 13pt;
+    color: var(--muted-text);
+    font-weight: 300;
+    letter-spacing: 0.3pt;
+  }
+
+  /* ZONE 2 — IDENTITY (slim band metadata) */
+  [data-zone="identity"] {
+    display: flex;
+    gap: 6mm;
+    background: white;
+    border: 0.2mm solid var(--border);
+    padding: 2mm 4mm;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .identity-pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2mm;
+    font-size: 11pt;
+  }
+  .identity-pill .label {
+    font-family: var(--font-mono);
+    font-size: 11pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+  }
+  .identity-pill strong {
+    color: var(--src-navy);
+  }
+
+  /* ZONE 3 — HERO (double timeline SVG) */
+  [data-zone="hero"] {
+    background: white;
+    border: 0.2mm solid var(--border);
+    padding: 2mm 3mm;
+  }
+  .timeline-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ZONE 4 — DISRUPTEUR */
+  [data-zone="disrupteur"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 3mm 5mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5mm;
+    align-items: center;
+  }
+  .disrupteur-num {
+    font-family: var(--font-display);
+    font-size: 60pt;
+    line-height: 0.85;
+    color: var(--critical);
+  }
+  .disrupteur-unit {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    text-transform: uppercase;
+    color: var(--passive);
+    letter-spacing: 1pt;
+  }
+  .disrupteur-main {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26pt;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .disrupteur-sec {
+    margin: 1.5mm 0 0 0;
+    font-size: 11pt;
+    color: var(--passive);
+  }
+
+  /* ZONE 5 — VALEUR (encart doré "Le mot du bureau" + photo) */
+  [data-zone="valeur"] {
+    background: rgba(196, 143, 26, 0.08);
+    border-left: 2mm solid var(--critical);
+    padding: 2.5mm 4mm;
+    display: grid;
+    grid-template-columns: 1fr 60mm;
+    gap: 4mm;
+  }
+  .bureau-text h2 {
+    margin: 0 0 2mm 0;
+    font-family: var(--font-display);
+    font-size: 22pt;
+    color: var(--critical);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  .bureau-text ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bureau-text li {
+    font-size: 10.5pt;
+    line-height: 1.4;
+    margin-bottom: 1.5mm;
+    color: var(--text);
+  }
+  .bureau-text li.first-point {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--src-navy);
+    line-height: 1.1;
+    padding: 1.5mm 2.5mm;
+    background: var(--cream);
+    border-left: 2mm solid var(--critical);
+    margin-bottom: 2mm;
+  }
+  .bureau-photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1.5mm;
+    border: 0.3mm solid var(--border);
+    align-self: start;
+  }
+
+  /* ZONE 6 — FRISE (4 phases du parcours SRC) */
+  [data-zone="frise"] {
+    border-top: 0.2mm solid var(--border);
+    border-bottom: 0.2mm solid var(--border);
+    padding: 2mm 0;
+  }
+  .frise-title {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-bottom: 1.5mm;
+  }
+  .phases-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2mm;
+  }
+  .phase-step {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-top: 0.8mm solid var(--src-navy);
+    padding: 1mm 2mm;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 11pt;
+    color: var(--src-navy);
+    letter-spacing: 0.3pt;
+    line-height: 1;
+  }
+  .phase-step .phase-sub {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.2pt;
+    margin-top: 0.3mm;
+    text-transform: none;
+  }
+
+  /* ZONE 7 — FOOTER */
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3mm;
+    border-top: 0.2mm solid var(--border);
+    padding-top: 2mm;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+  .logo-mini {
+    width: 7mm;
+    height: 7mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .footer-url {
+    font-family: var(--font-mono);
+    color: var(--src-navy);
+    font-size: 8pt;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header data-zone="header">
+    <div class="logo-chip">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo">
+    </div>
+    <div class="header-spacer"></div>
+    <span class="manifeste-tag">Manifeste</span>
+  </header>
+
+  <section class="title-block">
+    <h1 class="manifeste-title">{{ q.titre }}</h1>
+    <p class="manifeste-subtitle">{{ q.sous_titre }}</p>
+  </section>
+
+  <section data-zone="identity">
+    <div class="identity-pill" data-field="etape">
+      <span class="label">Étape</span>
+      <strong>{{ q.etape_parcours }}</strong>
+    </div>
+    <div class="identity-pill">
+      <span class="label">Série</span>
+      <strong>{{ q.duree_estimee_chir }}</strong>
+    </div>
+    <div class="identity-pill">
+      <span class="label">Rachis</span>
+      <strong>Lombaire + Cervical</strong>
+    </div>
+  </section>
+
+  <section data-zone="hero" data-screenshot-area-min="35">
+    <svg class="timeline-svg" viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Double timeline lombaire et cervicale">
+      <!-- Phase columns subtle backdrops -->
+      <rect x="170" y="20" width="180" height="335" fill="#F8F6F1" stroke="#E5E2DB" stroke-width="0.5"/>
+      <rect x="350" y="20" width="200" height="335" fill="white" stroke="#E5E2DB" stroke-width="0.5"/>
+      <rect x="550" y="20" width="170" height="335" fill="#F8F6F1" stroke="#E5E2DB" stroke-width="0.5"/>
+      <rect x="720" y="20" width="270" height="335" fill="white" stroke="#E5E2DB" stroke-width="0.5"/>
+
+      <!-- Phase labels -->
+      <text x="260" y="40" font-family="Bebas Neue" font-size="22" fill="#1E2D3D" text-anchor="middle">AVANT — T0</text>
+      <text x="450" y="40" font-family="Bebas Neue" font-size="22" fill="#1E2D3D" text-anchor="middle">DÉCISION</text>
+      <text x="635" y="40" font-family="Bebas Neue" font-size="22" fill="#1E2D3D" text-anchor="middle">ACTE</text>
+      <text x="855" y="40" font-family="Bebas Neue" font-size="22" fill="#1E2D3D" text-anchor="middle">SUIVI</text>
+
+      <text x="260" y="58" font-family="Space Mono" font-size="9" fill="#5B6470" text-anchor="middle">consultation initiale</text>
+      <text x="450" y="58" font-family="Space Mono" font-size="9" fill="#5B6470" text-anchor="middle">médical ou chirurgical</text>
+      <text x="635" y="58" font-family="Space Mono" font-size="9" fill="#5B6470" text-anchor="middle">CRO + CRH (commun)</text>
+      <text x="855" y="58" font-family="Space Mono" font-size="9" fill="#5B6470" text-anchor="middle">1M · 3M · 6M · 1A · 2A</text>
+
+      <!-- Row labels -->
+      <text x="20" y="135" font-family="Bebas Neue" font-size="20" fill="#1E2D3D">LOMBAIRE</text>
+      <text x="20" y="295" font-family="Bebas Neue" font-size="20" fill="#1E2D3D">CERVICAL</text>
+
+      <!-- Axes lombaire & cervical -->
+      <line x1="170" y1="130" x2="990" y2="130" stroke="#B8BEC7" stroke-width="2"/>
+      <polygon points="985,124 996,130 985,136" fill="#B8BEC7"/>
+      <line x1="170" y1="290" x2="990" y2="290" stroke="#B8BEC7" stroke-width="2"/>
+      <polygon points="985,284 996,290 985,296" fill="#B8BEC7"/>
+
+      <!-- Common items connectors (vertical lines) -->
+      <line x1="220" y1="130" x2="220" y2="290" stroke="#C48F1A" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="595" y1="130" x2="595" y2="290" stroke="#C48F1A" stroke-width="2"/>
+      <line x1="675" y1="130" x2="675" y2="290" stroke="#C48F1A" stroke-width="2"/>
+
+      <!-- Lombaire pastilles -->
+      <g><circle cx="220" cy="130" r="18" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1.5"/><text x="220" y="136" font-family="Bebas Neue" font-size="16" fill="#1E2D3D" text-anchor="middle">1D</text></g>
+      <g><circle cx="280" cy="130" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="280" y="136" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">2L</text></g>
+      <g><circle cx="335" cy="130" r="14" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="335" y="135" font-family="Bebas Neue" font-size="11" fill="#1E2D3D" text-anchor="middle">ODI</text></g>
+      <g><circle cx="410" cy="130" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="410" y="136" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">4L</text></g>
+      <g><circle cx="500" cy="130" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="500" y="136" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">5L</text></g>
+      <g><circle cx="595" cy="130" r="20" fill="#C48F1A" stroke="#1E2D3D" stroke-width="2"/><text x="595" y="137" font-family="Bebas Neue" font-size="17" fill="#F8F6F1" text-anchor="middle">6a</text></g>
+      <g><circle cx="675" cy="130" r="20" fill="#C48F1A" stroke="#1E2D3D" stroke-width="2"/><text x="675" y="137" font-family="Bebas Neue" font-size="17" fill="#F8F6F1" text-anchor="middle">6b</text></g>
+      <g><circle cx="755" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="755" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1M</text></g>
+      <g><circle cx="800" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="800" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">3M</text></g>
+      <g><circle cx="845" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="845" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">6M</text></g>
+      <g><circle cx="890" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="890" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1A</text></g>
+      <g><circle cx="935" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="935" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">2A</text></g>
+
+      <!-- 8L non-op branch (under lombaire) -->
+      <path d="M 335 144 Q 335 175 400 175 L 925 175" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      <g><circle cx="940" cy="175" r="13" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="940" y="180" font-family="Bebas Neue" font-size="10" fill="#1E2D3D" text-anchor="middle">8L</text></g>
+      <text x="430" y="172" font-family="Space Mono" font-size="8" fill="#5B6470">non opéré · suivi médical continu</text>
+
+      <!-- Cervical pastilles -->
+      <g><circle cx="220" cy="290" r="18" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1.5"/><text x="220" y="296" font-family="Bebas Neue" font-size="16" fill="#1E2D3D" text-anchor="middle">1D</text></g>
+      <g><circle cx="280" cy="290" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="280" y="296" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">2C</text></g>
+      <g><circle cx="335" cy="290" r="14" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="335" y="295" font-family="Bebas Neue" font-size="11" fill="#1E2D3D" text-anchor="middle">NDI</text></g>
+      <g><circle cx="410" cy="290" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="410" y="296" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">4C</text></g>
+      <g><circle cx="500" cy="290" r="18" fill="#00A890" stroke="#1E2D3D" stroke-width="1.5"/><text x="500" y="296" font-family="Bebas Neue" font-size="16" fill="#F8F6F1" text-anchor="middle">5C</text></g>
+      <g><circle cx="595" cy="290" r="20" fill="#C48F1A" stroke="#1E2D3D" stroke-width="2"/><text x="595" y="297" font-family="Bebas Neue" font-size="17" fill="#F8F6F1" text-anchor="middle">6a</text></g>
+      <g><circle cx="675" cy="290" r="20" fill="#C48F1A" stroke="#1E2D3D" stroke-width="2"/><text x="675" y="297" font-family="Bebas Neue" font-size="17" fill="#F8F6F1" text-anchor="middle">6b</text></g>
+      <g><circle cx="755" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="755" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1M</text></g>
+      <g><circle cx="800" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="800" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">3M</text></g>
+      <g><circle cx="845" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="845" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">6M</text></g>
+      <g><circle cx="890" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="890" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1A</text></g>
+      <g><circle cx="935" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="935" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">2A</text></g>
+
+      <!-- 8C non-op branch (under cervical) -->
+      <path d="M 335 304 Q 335 335 400 335 L 925 335" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      <g><circle cx="940" cy="335" r="13" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="940" y="340" font-family="Bebas Neue" font-size="10" fill="#1E2D3D" text-anchor="middle">8C</text></g>
+      <text x="430" y="332" font-family="Space Mono" font-size="8" fill="#5B6470">non opéré · suivi médical continu</text>
+
+      <!-- Inline legend bottom -->
+      <g transform="translate(170, 372)">
+        <circle cx="0" cy="0" r="5" fill="#B8BEC7"/>
+        <text x="9" y="3" font-family="Space Mono" font-size="9" fill="#5B6470">Patient</text>
+        <circle cx="80" cy="0" r="5" fill="#00A890"/>
+        <text x="89" y="3" font-family="Space Mono" font-size="9" fill="#5B6470">Chir</text>
+        <circle cx="155" cy="0" r="5" fill="#C48F1A"/>
+        <text x="164" y="3" font-family="Space Mono" font-size="9" fill="#5B6470">Commun (1D · 6a · 6b)</text>
+      </g>
+    </svg>
+  </section>
+
+  <section data-zone="disrupteur">
+    <div>
+      <div class="disrupteur-num">{{ q.disrupteur.chiffre }}</div>
+      <div class="disrupteur-unit">{{ q.disrupteur.unite }}</div>
+    </div>
+    <div>
+      <p class="disrupteur-main">{{ q.disrupteur.phrase_principale }}</p>
+      <p class="disrupteur-sec">{{ q.disrupteur.phrase_secondaire }}</p>
+    </div>
+  </section>
+
+  <section data-zone="valeur">
+    <div class="bureau-text">
+      <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+      <ul>
+        {% for p in q.a_quoi_ca_sert.points %}
+          <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% if abs_screenshots %}
+      <img src="{{ abs_screenshots[0] }}" alt="Bureau SRC" class="bureau-photo">
+    {% endif %}
+  </section>
+
+  <section data-zone="frise">
+    <div class="frise-title">Le parcours SRC en 4 phases</div>
+    <div class="phases-row">
+      <div class="phase-step">AVANT<span class="phase-sub">consultation initiale</span></div>
+      <div class="phase-step">DÉCISION<span class="phase-sub">médical · chir</span></div>
+      <div class="phase-step">ACTE<span class="phase-sub">CRO + CRH</span></div>
+      <div class="phase-step">SUIVI<span class="phase-sub">1M → 2A</span></div>
+    </div>
+  </section>
+
+  <footer data-zone="footer">
+    <div class="footer-left">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo-mini">
+      <span>Spine Research Community · Avril 2026 · Planche {{ q.numero_planche }}/{{ q.total_planches }}</span>
+    </div>
+    <span class="footer-url">src-infographies.github.io/jonathan3575</span>
+  </footer>
+
+</div>
+</body>
+</html>

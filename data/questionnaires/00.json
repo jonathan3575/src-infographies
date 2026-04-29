@@ -1,0 +1,71 @@
+{
+  "id": "00",
+  "titre": "La SRC en 12 planches",
+  "sous_titre": "50 chirs · une base · 12 questionnaires",
+  "numero_planche": "00",
+  "total_planches": 12,
+  "rachis": "commun",
+  "etape_parcours": "Manifeste",
+  "qui_remplit": [
+    {"role": "patient", "support": "Tablette", "pourcentage": 80},
+    {"role": "chirurgien", "support": "Ordi", "pourcentage": 20}
+  ],
+  "duree_estimee_chir": "12 planches",
+  "screenshot_follow": [
+    "assets/brand/bureau_src.jpg"
+  ],
+  "champs": [
+    {
+      "section": "Avant la consultation",
+      "qui": "patient",
+      "criticite": "normale",
+      "items": [
+        "1D — Démographie",
+        "2L / 2C — Première consultation",
+        "ODI / NDI — Score fonctionnel"
+      ]
+    },
+    {
+      "section": "Décision thérapeutique",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "4L / 4C — Diagnostic",
+        "5L / 5C — Programmation"
+      ]
+    },
+    {
+      "section": "Acte chirurgical",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "6a — Compte-rendu opératoire",
+        "6b — Compte-rendu d'hospitalisation"
+      ]
+    },
+    {
+      "section": "Suivi du patient",
+      "qui": "chirurgien",
+      "criticite": "normale",
+      "items": [
+        "1M · 3M · 6M · 1A · 2A — Post-opératoire",
+        "8L / 8C — Suivi médical (non opéré)"
+      ]
+    }
+  ],
+  "disrupteur": {
+    "chiffre": "50",
+    "unite": "chirurgiens",
+    "phrase_principale": "50 chirs  →  1 base",
+    "phrase_secondaire": "C'est ça qui rend la SRC unique en France."
+  },
+  "a_quoi_ca_sert": {
+    "titre": "Le mot du bureau",
+    "points": [
+      "Nous sommes plus de 50 chirurgiens à utiliser Follow chaque jour.",
+      "Une seule base, une seule logique de remplissage : c'est ça qui rend la SRC unique en France.",
+      "Ces 12 planches sont là pour nous aider à remplir vite et bien.",
+      "Parce que la qualité de la base, c'est la qualité de nos publications. — Le bureau SRC"
+    ]
+  }
+}
