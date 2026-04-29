@@ -320,7 +320,7 @@ INDEX_TEMPLATE = """<!doctype html>
   .about-photo {
     position: relative;
     height: clamp(200px, 30vh, 320px);
-    background-image: url('./assets/brand/bureau_src.jpg');
+    background-image: url('./assets/brand/bureau_src_rooftop.jpg');
     background-size: cover;
     background-position: center;
   }
@@ -434,7 +434,14 @@ CARD_TEMPLATE = """    <a class="card__CLASS_EXTRA__" href="./__ID__/">
     </a>"""
 
 # Brand assets toujours copiés dans docs/assets/brand/, indépendamment des planches.
-BRAND_ASSETS = ("assets/brand/logo_src.jpeg", "assets/brand/bureau_src.jpg")
+# - logo_src.jpeg : header + footer page d'accueil + planches
+# - bureau_src.jpg : photo institutionnelle, utilisée par le mot du bureau de la planche 00
+# - bureau_src_rooftop.jpg : ambiance communauté (rooftop), utilisée par l'encart "À propos" de la page d'accueil
+BRAND_ASSETS = (
+    "assets/brand/logo_src.jpeg",
+    "assets/brand/bureau_src.jpg",
+    "assets/brand/bureau_src_rooftop.jpg",
+)
 
 
 def render_index(published: list[dict]) -> str:
