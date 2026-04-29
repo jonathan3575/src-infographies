@@ -21,6 +21,17 @@ TL_HEIGHT = 1920
 TL_SCROLL_DURATION_MS = 15_000
 
 
+def find_tool(name: str) -> str | None:
+    """Locate ffmpeg/ffprobe even when /opt/homebrew/bin isn't in PATH."""
+    p = shutil.which(name)
+    if p:
+        return p
+    for cand in (f"/opt/homebrew/bin/{name}", f"/usr/local/bin/{name}"):
+        if Path(cand).exists():
+            return cand
+    return None
+
+
 def latest_html(directory: Path, qid: str, suffix: str) -> Path:
     rx = re.compile(rf"{re.escape(qid)}_{suffix}_v(\d+)\.html$")
     candidates = []
@@ -100,16 +111,29 @@ async def export_tl(qid: str) -> Path:
             raise RuntimeError("Playwright n'a pas enregistré de vidéo (video=None).")
         webm_path = Path(await video.path())
 
-    if shutil.which("ffmpeg"):
-        subprocess.run(
-            ["ffmpeg", "-y", "-i", str(webm_path), "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out_mp4)],
-            check=True,
-        )
-        webm_path.unlink(missing_ok=True)
-        return out_mp4
-    fallback = html_path.with_suffix(".webm")
-    shutil.move(str(webm_path), str(fallback))
-    return fallback
+    # Le webm Playwright a un nom auto-généré dans output/tl/. On le renomme
+    # systématiquement en {id}_tl_v{n}.webm pour garder une trace debug.
+    kept_webm = html_path.with_suffix(".webm")
+    if webm_path != kept_webm:
+        shutil.move(str(webm_path), str(kept_webm))
+
+    ffmpeg = find_tool("ffmpeg")
+    if not ffmpeg:
+        click.echo("[export tl] ffmpeg non trouvé, conservation du .webm uniquement.", err=True)
+        return kept_webm
+
+    subprocess.run(
+        [
+            ffmpeg, "-y", "-i", str(kept_webm),
+            "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+            "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart",
+            str(out_mp4),
+        ],
+        check=True,
+        capture_output=True,
+    )
+    return out_mp4
 
 
 @click.command()
