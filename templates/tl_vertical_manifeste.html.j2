@@ -297,6 +297,16 @@
     border-left: clamp(4px, 1vw, 6px) solid var(--gold);
     border-top: 0;
   }
+  .bureau-signature-tl {
+    align-self: flex-end;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: clamp(20px, 4.5vw, 36px);
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-top: clamp(8px, 1.5vh, 16px);
+    padding-right: clamp(4px, 1vw, 8px);
+  }
 
   [data-zone="footer"] {
     display: flex;
@@ -344,7 +354,7 @@
   </div>
 
   <div data-zone="header">
-    <div class="manifeste-tag-tl">Manifeste · Avril 2026</div>
+    <div class="manifeste-tag-tl">Vue d'ensemble · Avril 2026</div>
     <h1 class="title-tl">{{ q.titre }}</h1>
     <p class="subtitle-tl">{{ q.sous_titre }}</p>
   </div>
@@ -457,12 +467,13 @@
       <g><circle cx="180" cy="1050" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="1056" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">2A</text></g>
       <g><circle cx="420" cy="1050" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="1056" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">2A</text></g>
 
-      <!-- Branches non-op (8L | 8C) — partent de ODI/NDI vers SUIVI à l'extérieur -->
-      <path d="M 200 305 Q 280 360 280 800 Q 280 1080 200 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
+      <!-- Branches non-op (8L | 8C) — tracé v3 conservé tel quel, seul le point de départ
+           remonte de ODI/NDI vers 2L/2C (offset équivalent : +20,+15 par rapport au centre). -->
+      <path d="M 200 225 Q 280 360 280 800 Q 280 1080 200 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
       <g><circle cx="120" cy="1100" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="120" y="1107" font-family="Bebas Neue" font-size="16" fill="#F0EDE8" text-anchor="middle">8L</text></g>
       <text x="60" y="1140" font-family="Space Mono" font-size="11" fill="#6B7280">non opéré</text>
 
-      <path d="M 400 305 Q 320 360 320 800 Q 320 1080 400 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
+      <path d="M 400 225 Q 320 360 320 800 Q 320 1080 400 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
       <g><circle cx="480" cy="1100" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="480" y="1107" font-family="Bebas Neue" font-size="16" fill="#F0EDE8" text-anchor="middle">8C</text></g>
       <text x="450" y="1140" font-family="Space Mono" font-size="11" fill="#6B7280">non opéré</text>
 
@@ -507,11 +518,20 @@
     {% endif %}
     <div class="valeur-tag">Pourquoi cette série</div>
     <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+    {% set last_text = q.a_quoi_ca_sert.points[-1] %}
+    {% set has_sig = "— Le bureau SRC" in last_text %}
     <ul>
       {% for p in q.a_quoi_ca_sert.points %}
-        <li{% if loop.first %} class="first-point-tl"{% endif %}>{{ p }}</li>
+        {% if loop.last and has_sig %}
+          <li>{{ p.replace("— Le bureau SRC", "") | trim }}</li>
+        {% else %}
+          <li{% if loop.first %} class="first-point-tl"{% endif %}>{{ p }}</li>
+        {% endif %}
       {% endfor %}
     </ul>
+    {% if has_sig %}
+      <div class="bureau-signature-tl">— Le bureau SRC</div>
+    {% endif %}
   </div>
 
   <div data-zone="footer">

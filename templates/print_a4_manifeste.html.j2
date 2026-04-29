@@ -222,6 +222,16 @@
     border: 0.3mm solid var(--border);
     align-self: start;
   }
+  .bureau-signature {
+    margin-top: 1.5mm;
+    padding-right: 1mm;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 13pt;
+    color: var(--src-navy);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
 
   /* ZONE 6 — FRISE (4 phases du parcours SRC) */
   [data-zone="frise"] {
@@ -304,7 +314,7 @@
       <img src="{{ logo_path }}" alt="Logo SRC" class="logo">
     </div>
     <div class="header-spacer"></div>
-    <span class="manifeste-tag">Manifeste</span>
+    <span class="manifeste-tag">Vue d'ensemble</span>
   </header>
 
   <section class="title-block">
@@ -375,8 +385,8 @@
       <g><circle cx="890" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="890" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1A</text></g>
       <g><circle cx="935" cy="130" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="935" y="135" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">2A</text></g>
 
-      <!-- 8L non-op branch (under lombaire) -->
-      <path d="M 335 144 Q 335 175 400 175 L 925 175" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      <!-- 8L non-op branch (depuis 2L → 8L) -->
+      <path d="M 280 148 Q 280 175 360 175 L 925 175" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
       <g><circle cx="940" cy="175" r="13" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="940" y="180" font-family="Bebas Neue" font-size="10" fill="#1E2D3D" text-anchor="middle">8L</text></g>
       <text x="430" y="172" font-family="Space Mono" font-size="8" fill="#5B6470">non opéré · suivi médical continu</text>
 
@@ -394,8 +404,8 @@
       <g><circle cx="890" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="890" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">1A</text></g>
       <g><circle cx="935" cy="290" r="14" fill="#00A890" stroke="#1E2D3D" stroke-width="1"/><text x="935" y="295" font-family="Bebas Neue" font-size="11" fill="#F8F6F1" text-anchor="middle">2A</text></g>
 
-      <!-- 8C non-op branch (under cervical) -->
-      <path d="M 335 304 Q 335 335 400 335 L 925 335" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      <!-- 8C non-op branch (depuis 2C → 8C) -->
+      <path d="M 280 308 Q 280 335 360 335 L 925 335" stroke="#B8BEC7" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
       <g><circle cx="940" cy="335" r="13" fill="#B8BEC7" stroke="#1E2D3D" stroke-width="1"/><text x="940" y="340" font-family="Bebas Neue" font-size="10" fill="#1E2D3D" text-anchor="middle">8C</text></g>
       <text x="430" y="332" font-family="Space Mono" font-size="8" fill="#5B6470">non opéré · suivi médical continu</text>
 
@@ -425,11 +435,20 @@
   <section data-zone="valeur">
     <div class="bureau-text">
       <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+      {% set last_text = q.a_quoi_ca_sert.points[-1] %}
+      {% set has_sig = "— Le bureau SRC" in last_text %}
       <ul>
         {% for p in q.a_quoi_ca_sert.points %}
-          <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+          {% if loop.last and has_sig %}
+            <li>{{ p.replace("— Le bureau SRC", "") | trim }}</li>
+          {% else %}
+            <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+          {% endif %}
         {% endfor %}
       </ul>
+      {% if has_sig %}
+        <div class="bureau-signature">— Le bureau SRC</div>
+      {% endif %}
     </div>
     {% if abs_screenshots %}
       <img src="{{ abs_screenshots[0] }}" alt="Bureau SRC" class="bureau-photo">

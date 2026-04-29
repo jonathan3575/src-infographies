@@ -1,7 +1,7 @@
 {
   "id": "00",
-  "titre": "La SRC en 12 planches",
-  "sous_titre": "50 chirs · une base · 12 questionnaires",
+  "titre": "Le système SRC",
+  "sous_titre": "50 Spine Surgeons · une base · 12 questionnaires",
   "numero_planche": "00",
   "total_planches": 12,
   "rachis": "commun",
@@ -55,8 +55,8 @@
   ],
   "disrupteur": {
     "chiffre": "50",
-    "unite": "chirurgiens",
-    "phrase_principale": "50 chirs  →  1 base",
+    "unite": "Spine Surgeons",
+    "phrase_principale": "50 Spine Surgeons  →  1 base",
     "phrase_secondaire": "C'est ça qui rend la SRC unique en France."
   },
   "a_quoi_ca_sert": {
