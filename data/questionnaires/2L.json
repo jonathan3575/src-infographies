@@ -1,0 +1,56 @@
+{
+  "id": "2L",
+  "titre": "Première consultation pour rachis lombaire",
+  "sous_titre": "Première consultation rachis lombaire",
+  "numero_planche": "01",
+  "total_planches": 12,
+  "rachis": "lombaire",
+  "etape_parcours": "Première consultation",
+  "qui_remplit": [
+    {"role": "patient", "support": "Tablette", "pourcentage": 80},
+    {"role": "chirurgien", "support": "Ordi", "pourcentage": 20}
+  ],
+  "duree_estimee_chir": "≈ 30 secondes",
+  "screenshot_follow": [
+    "assets/screenshots/follow/2L_global_chir.png"
+  ],
+  "champs": [
+    {
+      "section": "Le patient a déjà tout fait sur la tablette",
+      "qui": "patient",
+      "criticite": "normale",
+      "items": [
+        "Motif, trajet, symptômes, côté, ancienneté",
+        "Traitements déjà entrepris, médicaments",
+        "EVA dos / EVA jambe (0 à 10)",
+        "ODI"
+      ]
+    },
+    {
+      "section": "Toi, tu as 4 décisions à prendre",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "1. Imagerie disponible (ex : IRM, EOS)",
+        "2. Niveau diagnostic (ex : L4L5)",
+        "3. Diagnostic neurologique (avec ou sans déficit)",
+        "4. Diagnostic qui explique la symptomatologie (HD, sténose, SPL, SPD...)"
+      ]
+    }
+  ],
+  "disrupteur": {
+    "chiffre": "4",
+    "unite": "décisions",
+    "phrase_principale": "4 décisions  →  30 secondes",
+    "phrase_secondaire": "Le patient a fait le reste."
+  },
+  "a_quoi_ca_sert": {
+    "titre": "Pourquoi ce questionnaire 2L change tout",
+    "points": [
+      "C'est le T0 de chaque patient. Sans lui, aucune comparaison post-op n'est possible.",
+      "Le PROJET THÉRAPEUTIQUE est la variable cible de toutes nos études (médicale vs chirurgicale).",
+      "Toutes les études en cours en dépendent.",
+      "Sans le 2L de référence, le patient n'entre dans aucune étude SRC."
+    ]
+  }
+}

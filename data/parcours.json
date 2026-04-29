@@ -1,0 +1,32 @@
+{
+  "lombaire": [
+    {"id": "1D",  "label": "Démographie",   "qui": "patient"},
+    {"id": "2L",  "label": "1ère consult",  "qui": "mixte",   "highlight": true},
+    {"id": "ODI", "label": "ODI préop",     "qui": "patient"},
+    {"id": "8L",  "label": "Suivi médical", "qui": "patient", "branch": "non_op"},
+    {"id": "4L",  "label": "Diagnostic",    "qui": "chir",    "branch": "op"},
+    {"id": "5L",  "label": "Programmation", "qui": "chir",    "branch": "op"},
+    {"id": "6a",  "label": "CRO",           "qui": "chir",    "branch": "op"},
+    {"id": "6b",  "label": "CRH",           "qui": "chir",    "branch": "op"},
+    {"id": "1M",  "label": "1 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "3M",  "label": "3 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "6M",  "label": "6 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "1A",  "label": "1 an",          "qui": "mixte",   "branch": "op"},
+    {"id": "2A",  "label": "2 ans",         "qui": "mixte",   "branch": "op"}
+  ],
+  "cervical": [
+    {"id": "1D",  "label": "Démographie",   "qui": "patient"},
+    {"id": "2C",  "label": "1ère consult",  "qui": "mixte"},
+    {"id": "NDI", "label": "NDI préop",     "qui": "patient"},
+    {"id": "8C",  "label": "Suivi médical", "qui": "patient", "branch": "non_op"},
+    {"id": "4C",  "label": "Diagnostic",    "qui": "chir",    "branch": "op"},
+    {"id": "5C",  "label": "Programmation", "qui": "chir",    "branch": "op"},
+    {"id": "6a",  "label": "CRO",           "qui": "chir",    "branch": "op"},
+    {"id": "6b",  "label": "CRH",           "qui": "chir",    "branch": "op"},
+    {"id": "1M",  "label": "1 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "3M",  "label": "3 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "6M",  "label": "6 mois",        "qui": "mixte",   "branch": "op"},
+    {"id": "1A",  "label": "1 an",          "qui": "mixte",   "branch": "op"},
+    {"id": "2A",  "label": "2 ans",         "qui": "mixte",   "branch": "op"}
+  ]
+}

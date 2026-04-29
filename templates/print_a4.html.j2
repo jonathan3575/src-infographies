@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{{ q.id }} — {{ q.titre }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --src-navy: #1E2D3D;
+    --action: #00A890;
+    --critical: #C48F1A;
+    --passive: #B8BEC7;
+    --cream: #F8F6F1;
+    --text: #0E1117;
+    --muted-text: #5B6470;
+    --border: #E5E2DB;
+
+    --title-size: 64pt;
+    --body-size: 10pt;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: 1.35;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  /* ZONE 1 — HEADER (bandeau navy avec logo agrandi + code questionnaire en gros) */
+  [data-zone="header"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 2.5mm 4mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4mm;
+    align-items: center;
+  }
+  .logo-chip {
+    background: var(--cream);
+    padding: 1.5mm;
+    border-radius: 1.5mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo {
+    width: 22mm;
+    height: 22mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5mm;
+  }
+  .header-code {
+    font-family: var(--font-display);
+    font-size: 44pt;
+    color: var(--action);
+    letter-spacing: 1pt;
+    line-height: 0.95;
+  }
+  .header-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 20pt;
+    color: var(--cream);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  .header-meta {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--passive);
+    letter-spacing: 0.5pt;
+    line-height: 1.5;
+  }
+
+  /* ZONE 2 — IDENTITY (slim band durée + qui remplit) */
+  [data-zone="identity"] {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6mm;
+    background: white;
+    border: 0.2mm solid var(--border);
+    padding: 2.5mm 4mm;
+    align-items: center;
+  }
+  .identity-cell .label {
+    font-family: var(--font-mono);
+    font-size: 11pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-right: 2mm;
+  }
+  .identity-cell strong {
+    font-size: 11pt;
+    color: var(--src-navy);
+    margin-right: 4mm;
+  }
+  .identity-qui {
+    display: flex;
+    gap: 4mm;
+    flex-wrap: wrap;
+  }
+  .qr-pill {
+    font-size: 10pt;
+    color: var(--text);
+    border-left: 1.2mm solid var(--passive);
+    padding-left: 2mm;
+  }
+  .qr-pill.chir { border-color: var(--action); }
+
+  /* ZONE 3 — HERO (screenshot pleine largeur, sans aside) */
+  [data-zone="hero"] {
+    background: white;
+    border: 0.2mm solid var(--border);
+    padding: 1mm;
+  }
+  .screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 50mm;
+    object-fit: contain;
+  }
+
+  /* CHAMPS SECTIONS — 2 colonnes sous le hero */
+  .champs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+  }
+  .champs-section {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-top: 1mm solid var(--passive);
+    padding: 3mm;
+  }
+  .champs-section.haute { border-top-color: var(--action); }
+  .champs-section.critique { border-top-color: var(--critical); }
+  .champs-section-title {
+    font-family: var(--font-display);
+    font-size: 16pt;
+    color: var(--src-navy);
+    margin: 0 0 2mm 0;
+    line-height: 1;
+    letter-spacing: 0.3pt;
+  }
+  .champs-section ul {
+    margin: 0;
+    padding-left: 4mm;
+  }
+  .champs-section li {
+    font-size: 9.5pt;
+    margin-bottom: 1mm;
+    line-height: 1.35;
+  }
+
+  /* ZONE 4 — DISRUPTEUR */
+  [data-zone="disrupteur"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 3mm 5mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5mm;
+    align-items: center;
+  }
+  .disrupteur-num {
+    font-family: var(--font-display);
+    font-size: 60pt;
+    line-height: 0.85;
+    color: var(--critical);
+  }
+  .disrupteur-unit {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    text-transform: uppercase;
+    color: var(--passive);
+    letter-spacing: 1pt;
+  }
+  .disrupteur-main {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26pt;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .disrupteur-sec {
+    margin: 1.5mm 0 0 0;
+    font-size: 10pt;
+    color: var(--passive);
+  }
+
+  /* ZONE 5 — VALEUR (encart doré, premier point en avant) */
+  [data-zone="valeur"] {
+    background: rgba(196, 143, 26, 0.08);
+    border-left: 2mm solid var(--critical);
+    padding: 2.5mm 4mm;
+  }
+  [data-zone="valeur"] h2 {
+    margin: 0 0 1.5mm 0;
+    font-family: var(--font-display);
+    font-size: 18pt;
+    color: var(--critical);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  [data-zone="valeur"] ul {
+    margin: 0;
+    padding-left: 4mm;
+  }
+  [data-zone="valeur"] li {
+    font-size: 10pt;
+    margin-bottom: 0.8mm;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  [data-zone="valeur"] li.first-point {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--src-navy);
+    line-height: 1.05;
+    list-style: none;
+    margin-left: -4mm;
+    padding: 1.5mm 2.5mm;
+    background: var(--cream);
+    border-left: 2mm solid var(--critical);
+    margin-bottom: 1.5mm;
+  }
+
+  /* ZONE 6 — FRISE (timeline avec embranchement après ODI) */
+  [data-zone="frise"] {
+    border-top: 0.2mm solid var(--border);
+    border-bottom: 0.2mm solid var(--border);
+    padding: 2mm 0;
+  }
+  .frise-title {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-bottom: 2mm;
+  }
+  .frise-grid {
+    display: grid;
+    grid-template-columns: auto 4mm 1fr;
+    gap: 1.5mm 2mm;
+    align-items: center;
+  }
+  .frise-pre {
+    grid-column: 1 / 4;
+    display: flex;
+    gap: 1.5mm;
+    align-items: center;
+    margin-bottom: 1.5mm;
+  }
+  .frise-pre::after {
+    content: "";
+    flex: 1;
+    height: 0.3mm;
+    background: var(--passive);
+  }
+  .branch-label {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    white-space: nowrap;
+  }
+  .branch-arrow {
+    text-align: center;
+    color: var(--passive);
+    font-family: var(--font-mono);
+    font-size: 11pt;
+    line-height: 1;
+  }
+  .branch-line {
+    display: flex;
+    gap: 1.5mm;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .frise-step {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    background: white;
+    border: 0.2mm solid var(--border);
+    padding: 0.8mm 2mm;
+    color: var(--muted-text);
+    line-height: 1.1;
+  }
+  .frise-step.active {
+    background: var(--action);
+    color: white;
+    border-color: var(--action);
+    font-weight: 700;
+    box-shadow: 0 0 0 0.5mm rgba(0, 168, 144, 0.25);
+  }
+  .frise-step.active::before {
+    content: "▸ ";
+    color: var(--cream);
+  }
+  .branch-line.op .frise-step { border-left: 0.6mm solid var(--action); }
+  .branch-line.non_op .frise-step { border-left: 0.6mm solid var(--passive); }
+
+  /* ZONE 7 — FOOTER */
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0.2mm solid var(--border);
+    padding-top: 2mm;
+    margin-top: 1mm;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+  .logo-mini {
+    width: 7mm;
+    height: 7mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  {% set rachis_steps = parcours[q.rachis] if q.rachis in parcours else parcours.get("lombaire", []) %}
+
+  <header data-zone="header">
+    <div class="logo-chip">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo">
+    </div>
+    <div class="header-text">
+      <div class="header-code">QUESTIONNAIRE {{ q.id }}</div>
+      <h1 class="header-title">{{ q.titre }}</h1>
+    </div>
+  </header>
+
+  <section data-zone="identity">
+    <div class="identity-cell">
+      <span class="label">Durée chir</span>
+      <strong>{{ q.duree_estimee_chir }}</strong>
+    </div>
+    <div class="identity-qui">
+      {% for qr in q.qui_remplit %}
+        <div class="qr-pill {{ qr.role }}">
+          <strong>{{ qr.role|capitalize }}</strong> · {{ qr.support }} · {{ qr.pourcentage }}%
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section data-zone="hero" data-screenshot-area-min="35">
+    {% for path in abs_screenshots %}
+      <img src="{{ path }}" alt="Follow {{ q.id }} part {{ loop.index }}" class="screenshot">
+    {% endfor %}
+  </section>
+
+  <div class="champs-grid">
+    {% for s in q.champs %}
+      <div class="champs-section {{ s.criticite }}">
+        <h3 class="champs-section-title">{{ s.section }}</h3>
+        <ul>
+          {% for it in s["items"] %}
+            <li>{{ it }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+
+  <section data-zone="disrupteur">
+    <div>
+      <div class="disrupteur-num">{{ q.disrupteur.chiffre }}</div>
+      <div class="disrupteur-unit">{{ q.disrupteur.unite }}</div>
+    </div>
+    <div>
+      <p class="disrupteur-main">{{ q.disrupteur.phrase_principale }}</p>
+      <p class="disrupteur-sec">{{ q.disrupteur.phrase_secondaire }}</p>
+    </div>
+  </section>
+
+  <section data-zone="valeur">
+    <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+    <ul>
+      {% for p in q.a_quoi_ca_sert.points %}
+        <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section data-zone="frise">
+    <div class="frise-title" data-field="etape">Position dans ton parcours patient — {{ q.rachis }}</div>
+    <div class="frise-grid">
+      <div class="frise-pre">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") is none %}
+            <span class="frise-step{% if step.get('highlight') %} active{% endif %}">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="branch-label">Non opéré</div>
+      <div class="branch-arrow">↗</div>
+      <div class="branch-line non_op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "non_op" %}
+            <span class="frise-step">{{ step.id }} · {{ step.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="branch-label">Opéré</div>
+      <div class="branch-arrow">↘</div>
+      <div class="branch-line op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "op" %}
+            <span class="frise-step">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer data-zone="footer">
+    <div class="footer-left">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo-mini">
+      <span>Spine Research Community</span>
+    </div>
+    <span>{{ q.id }} · planche #{{ q.numero_planche }}/{{ q.total_planches }} · {{ today }}</span>
+  </footer>
+
+</div>
+</body>
+</html>
