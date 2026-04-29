@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>00 — La SRC en 12 planches · TL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* TL manifeste — design ref 1080×1920 — fluide responsive */
+  :root {
+    --bg: #080A0F;
+    --bg2: #0E1117;
+    --bg3: #141820;
+    --teal: #00D4B4;
+    --teal-dim: #00A890;
+    --gold: #F0B429;
+    --gold-dim: #C48F1A;
+    --white: #F0EDE8;
+    --muted: #6B7280;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
+
+  html, body {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: clamp(14px, 3.5vw, 26px);
+    line-height: 1.4;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  section[data-snap="true"] {
+    width: 100%;
+    max-width: 100vw;
+    padding: 6vh 6vw;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 24px);
+    scroll-snap-align: start;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  section[data-snap="true"].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === SECTION 1 — Hero === */
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-tl {
+    width: clamp(48px, 9vw, 88px);
+    height: auto;
+    object-fit: contain;
+  }
+  .topbar-meta {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 22px);
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  [data-zone="header"] {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1vh, 12px);
+  }
+  .manifeste-tag-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .title-tl {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 13vw, 160px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-top: clamp(4px, 0.8vh, 12px);
+  }
+  .subtitle-tl {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 5vw, 48px);
+    line-height: 1;
+    color: var(--teal);
+    letter-spacing: 1px;
+    margin-top: clamp(8px, 1.5vh, 16px);
+  }
+
+  [data-zone="identity"] {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: clamp(12px, 2vh, 20px) clamp(14px, 3vw, 28px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(12px, 3vw, 32px);
+    row-gap: clamp(6px, 1.2vh, 12px);
+    margin-top: auto;
+  }
+  .identity-cell-tl {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(6px, 1.5vw, 12px);
+    flex-wrap: wrap;
+  }
+  .identity-cell-tl .label-tl,
+  .identity-cell-tl .value-tl {
+    font-size: clamp(13px, 3vw, 24px);
+    line-height: 1.2;
+  }
+  .identity-cell-tl .label-tl {
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .identity-cell-tl .value-tl {
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* === SECTION 2 — Hero (timeline SVG verticale) === */
+
+  .section-hero { padding: 4vh 6vw; }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .section-title-tl {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 11vw, 88px);
+    line-height: 1;
+    color: var(--teal);
+    letter-spacing: 0.5px;
+    margin-top: clamp(4px, 0.8vh, 12px);
+    margin-bottom: clamp(8px, 1.5vh, 16px);
+  }
+
+  [data-zone="hero"] {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: clamp(8px, 1.5vh, 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-svg-tl {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  [data-zone="frise"] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(4px, 1vw, 8px);
+    margin-top: clamp(8px, 1.5vh, 16px);
+  }
+  .phase-step-tl {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 3px solid var(--teal);
+    padding: clamp(8px, 1.5vh, 12px) clamp(4px, 1vw, 8px);
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(14px, 3vw, 22px);
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  /* === SECTION 3 — Disrupteur === */
+
+  .section-disrupteur { padding: 10vh 6vw; }
+
+  [data-zone="disrupteur"] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: clamp(8px, 1.5vh, 16px);
+  }
+  .disrupteur-tag-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    color: var(--muted);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    text-transform: uppercase;
+  }
+  .disrupteur-line {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 18vw, 220px);
+    line-height: 0.95;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .disrupteur-arrow-tl {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 14vw, 160px);
+    color: var(--white);
+    line-height: 1;
+  }
+  .disrupteur-sec-tl {
+    font-size: clamp(18px, 5vw, 36px);
+    color: var(--muted);
+    margin-top: clamp(20px, 4vh, 60px);
+    line-height: 1.4;
+  }
+
+  /* === SECTION 4 — Mot du bureau + footer === */
+
+  .section-bureau { padding: 6vh 6vw 4vh; }
+
+  [data-zone="valeur"] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(240, 180, 41, 0.08);
+    border-left: clamp(4px, 1vw, 8px) solid var(--gold);
+    padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 36px);
+    gap: clamp(12px, 2vh, 24px);
+  }
+  .bureau-photo-tl {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.07);
+    aspect-ratio: 4 / 3;
+  }
+  [data-zone="valeur"] .valeur-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 24px);
+    letter-spacing: clamp(2px, 1vw, 6px);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  [data-zone="valeur"] h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 10vw, 80px);
+    line-height: 0.95;
+    color: var(--gold);
+    margin: clamp(4px, 0.8vh, 8px) 0 clamp(10px, 2vh, 20px) 0;
+  }
+  [data-zone="valeur"] ul {
+    list-style: none;
+  }
+  [data-zone="valeur"] li {
+    font-size: clamp(14px, 3.2vw, 26px);
+    line-height: 1.4;
+    color: var(--white);
+    padding: clamp(8px, 1.4vh, 14px) 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  [data-zone="valeur"] li:last-child {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  [data-zone="valeur"] li.first-point-tl {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 7vw, 52px);
+    line-height: 1.05;
+    color: var(--white);
+    background: rgba(240, 180, 41, 0.18);
+    padding: clamp(14px, 2.5vh, 24px) clamp(14px, 3vw, 28px);
+    margin: 0 0 clamp(8px, 1.5vh, 12px) 0;
+    border-left: clamp(4px, 1vw, 6px) solid var(--gold);
+    border-top: 0;
+  }
+
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: clamp(12px, 2vh, 16px);
+    margin-top: clamp(12px, 2vh, 24px);
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-tl-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.5vw, 16px);
+  }
+  .footer-tl-logo {
+    width: clamp(40px, 5vw, 64px);
+    height: auto;
+    object-fit: contain;
+  }
+  .footer-tl-text {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 3.5vw, 28px);
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  .footer-tl-meta {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 2vw, 18px);
+    color: var(--muted);
+    letter-spacing: 1.5px;
+  }
+</style>
+</head>
+<body data-tl-format="1080x1920">
+
+<!-- =========================================
+     SECTION 1 — Hero (header + identity)
+     ========================================= -->
+<section data-snap="true">
+  <div class="topbar">
+    <img src="../assets/brand/logo_src.jpeg" alt="Logo SRC" class="logo-tl">
+    <div class="topbar-meta">#00/12</div>
+  </div>
+
+  <div data-zone="header">
+    <div class="manifeste-tag-tl">Manifeste · Avril 2026</div>
+    <h1 class="title-tl">La SRC en 12 planches</h1>
+    <p class="subtitle-tl">50 chirs · une base · 12 questionnaires</p>
+  </div>
+
+  <div data-zone="identity">
+    <div class="identity-cell-tl" data-field="etape">
+      <span class="label-tl">Étape</span>
+      <span class="value-tl">Manifeste</span>
+    </div>
+    <div class="identity-cell-tl">
+      <span class="label-tl">Série</span>
+      <span class="value-tl">12 planches</span>
+    </div>
+    <div class="identity-cell-tl">
+      <span class="label-tl">Lombaire</span>
+      <span class="value-tl">+ Cervical</span>
+    </div>
+    <div class="identity-cell-tl">
+      <span class="label-tl">Chirs</span>
+      <span class="value-tl">50+</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     SECTION 2 — Hero : double timeline verticale + frise des 4 phases
+     ========================================= -->
+<section data-snap="true" class="section-hero">
+  <div class="section-tag">Le parcours patient</div>
+  <h2 class="section-title-tl">Lombaire et cervical, même flow</h2>
+
+  <div data-zone="hero" data-screenshot-area-min="35">
+    <svg class="timeline-svg-tl" viewBox="0 0 600 1180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Double timeline verticale lombaire et cervicale">
+
+      <!-- Colonnes axes labels -->
+      <text x="180" y="40" font-family="Bebas Neue" font-size="22" fill="#F0EDE8" text-anchor="middle">LOMBAIRE</text>
+      <text x="420" y="40" font-family="Bebas Neue" font-size="22" fill="#F0EDE8" text-anchor="middle">CERVICAL</text>
+
+      <!-- Phase row backdrops (subtle) -->
+      <rect x="20" y="60" width="560" height="280" fill="#141820" stroke="rgba(255,255,255,0.05)" stroke-width="1" rx="6"/>
+      <rect x="20" y="350" width="560" height="200" fill="#0E1117" stroke="rgba(255,255,255,0.05)" stroke-width="1" rx="6"/>
+      <rect x="20" y="560" width="560" height="180" fill="#141820" stroke="rgba(255,255,255,0.05)" stroke-width="1" rx="6"/>
+      <rect x="20" y="750" width="560" height="380" fill="#0E1117" stroke="rgba(255,255,255,0.05)" stroke-width="1" rx="6"/>
+
+      <!-- Phase labels (left) -->
+      <text x="40" y="90" font-family="Bebas Neue" font-size="20" fill="#F0B429">AVANT — T0</text>
+      <text x="40" y="108" font-family="Space Mono" font-size="11" fill="#6B7280">consultation initiale</text>
+
+      <text x="40" y="380" font-family="Bebas Neue" font-size="20" fill="#F0B429">DÉCISION</text>
+      <text x="40" y="398" font-family="Space Mono" font-size="11" fill="#6B7280">médical ou chirurgical</text>
+
+      <text x="40" y="590" font-family="Bebas Neue" font-size="20" fill="#F0B429">ACTE</text>
+      <text x="40" y="608" font-family="Space Mono" font-size="11" fill="#6B7280">CRO + CRH (commun)</text>
+
+      <text x="40" y="780" font-family="Bebas Neue" font-size="20" fill="#F0B429">SUIVI</text>
+      <text x="40" y="798" font-family="Space Mono" font-size="11" fill="#6B7280">1M · 3M · 6M · 1A · 2A</text>
+
+      <!-- Vertical axes (lombaire & cervical) -->
+      <line x1="180" y1="50" x2="180" y2="1140" stroke="#6B7280" stroke-width="2"/>
+      <line x1="420" y1="50" x2="420" y2="1140" stroke="#6B7280" stroke-width="2"/>
+      <polygon points="174,1140 180,1152 186,1140" fill="#6B7280"/>
+      <polygon points="414,1140 420,1152 426,1140" fill="#6B7280"/>
+
+      <!-- Common items horizontal connectors -->
+      <line x1="180" y1="135" x2="420" y2="135" stroke="#F0B429" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="180" y1="615" x2="420" y2="615" stroke="#F0B429" stroke-width="2"/>
+      <line x1="180" y1="690" x2="420" y2="690" stroke="#F0B429" stroke-width="2"/>
+
+      <!-- AVANT — T0 -->
+      <!-- 1D commun (sur l'axe lombaire ET cervical, reliés) -->
+      <g><circle cx="180" cy="135" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.5"/><text x="180" y="142" font-family="Bebas Neue" font-size="18" fill="#F0EDE8" text-anchor="middle">1D</text></g>
+      <g><circle cx="420" cy="135" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.5"/><text x="420" y="142" font-family="Bebas Neue" font-size="18" fill="#F0EDE8" text-anchor="middle">1D</text></g>
+
+      <!-- 2L | 2C -->
+      <g><circle cx="180" cy="210" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="180" y="218" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">2L</text></g>
+      <g><circle cx="420" cy="210" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="420" y="218" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">2C</text></g>
+
+      <!-- ODI | NDI -->
+      <g><circle cx="180" cy="290" r="20" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="296" font-family="Bebas Neue" font-size="14" fill="#F0EDE8" text-anchor="middle">ODI</text></g>
+      <g><circle cx="420" cy="290" r="20" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="296" font-family="Bebas Neue" font-size="14" fill="#F0EDE8" text-anchor="middle">NDI</text></g>
+
+      <!-- DÉCISION — 4L|4C, 5L|5C -->
+      <g><circle cx="180" cy="420" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="180" y="428" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">4L</text></g>
+      <g><circle cx="420" cy="420" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="420" y="428" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">4C</text></g>
+
+      <g><circle cx="180" cy="500" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="180" y="508" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">5L</text></g>
+      <g><circle cx="420" cy="500" r="24" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.5"/><text x="420" y="508" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">5C</text></g>
+
+      <!-- ACTE — 6a, 6b commun (jonction) -->
+      <g><circle cx="180" cy="615" r="26" fill="#F0B429" stroke="#F0EDE8" stroke-width="2"/><text x="180" y="623" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">6a</text></g>
+      <g><circle cx="420" cy="615" r="26" fill="#F0B429" stroke="#F0EDE8" stroke-width="2"/><text x="420" y="623" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">6a</text></g>
+
+      <g><circle cx="180" cy="690" r="26" fill="#F0B429" stroke="#F0EDE8" stroke-width="2"/><text x="180" y="698" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">6b</text></g>
+      <g><circle cx="420" cy="690" r="26" fill="#F0B429" stroke="#F0EDE8" stroke-width="2"/><text x="420" y="698" font-family="Bebas Neue" font-size="20" fill="#080A0F" text-anchor="middle">6b</text></g>
+
+      <!-- SUIVI — 1M, 3M, 6M, 1A, 2A -->
+      <g><circle cx="180" cy="810" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="816" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">1M</text></g>
+      <g><circle cx="420" cy="810" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="816" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">1M</text></g>
+
+      <g><circle cx="180" cy="870" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="876" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">3M</text></g>
+      <g><circle cx="420" cy="870" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="876" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">3M</text></g>
+
+      <g><circle cx="180" cy="930" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="936" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">6M</text></g>
+      <g><circle cx="420" cy="930" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="936" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">6M</text></g>
+
+      <g><circle cx="180" cy="990" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="996" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">1A</text></g>
+      <g><circle cx="420" cy="990" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="996" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">1A</text></g>
+
+      <g><circle cx="180" cy="1050" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="180" y="1056" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">2A</text></g>
+      <g><circle cx="420" cy="1050" r="20" fill="#00D4B4" stroke="#F0EDE8" stroke-width="1.2"/><text x="420" y="1056" font-family="Bebas Neue" font-size="14" fill="#080A0F" text-anchor="middle">2A</text></g>
+
+      <!-- Branches non-op (8L | 8C) — partent de ODI/NDI vers SUIVI à l'extérieur -->
+      <path d="M 200 305 Q 280 360 280 800 Q 280 1080 200 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
+      <g><circle cx="120" cy="1100" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="120" y="1107" font-family="Bebas Neue" font-size="16" fill="#F0EDE8" text-anchor="middle">8L</text></g>
+      <text x="60" y="1140" font-family="Space Mono" font-size="11" fill="#6B7280">non opéré</text>
+
+      <path d="M 400 305 Q 320 360 320 800 Q 320 1080 400 1100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
+      <g><circle cx="480" cy="1100" r="22" fill="#6B7280" stroke="#F0EDE8" stroke-width="1.2"/><text x="480" y="1107" font-family="Bebas Neue" font-size="16" fill="#F0EDE8" text-anchor="middle">8C</text></g>
+      <text x="450" y="1140" font-family="Space Mono" font-size="11" fill="#6B7280">non opéré</text>
+
+    </svg>
+  </div>
+
+  <div data-zone="frise">
+    <div class="phase-step-tl">AVANT</div>
+    <div class="phase-step-tl">DÉCISION</div>
+    <div class="phase-step-tl">ACTE</div>
+    <div class="phase-step-tl">SUIVI</div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     SECTION 3 — Disrupteur
+     ========================================= -->
+<section data-snap="true" class="section-disrupteur">
+  <div data-zone="disrupteur">
+    <div class="disrupteur-tag-tl">Le chiffre</div>
+      <div class="disrupteur-line">50 chirs</div>
+      <div class="disrupteur-arrow-tl">→</div>
+      <div class="disrupteur-line">1 base</div>
+    <p class="disrupteur-sec-tl">C&#39;est ça qui rend la SRC unique en France.</p>
+  </div>
+</section>
+
+
+<!-- =========================================
+     SECTION 4 — Mot du bureau (photo + texte) + footer
+     ========================================= -->
+<section data-snap="true" class="section-bureau">
+  <div data-zone="valeur">
+      <img src="../assets/brand/bureau_src.jpg" alt="Bureau SRC" class="bureau-photo-tl">
+    <div class="valeur-tag">Pourquoi cette série</div>
+    <h2>Le mot du bureau</h2>
+    <ul>
+        <li class="first-point-tl">Nous sommes plus de 50 chirurgiens à utiliser Follow chaque jour.</li>
+        <li>Une seule base, une seule logique de remplissage : c&#39;est ça qui rend la SRC unique en France.</li>
+        <li>Ces 12 planches sont là pour nous aider à remplir vite et bien.</li>
+        <li>Parce que la qualité de la base, c&#39;est la qualité de nos publications. — Le bureau SRC</li>
+    </ul>
+  </div>
+
+  <div data-zone="footer">
+    <div class="footer-tl-left">
+      <img src="../assets/brand/logo_src.jpeg" alt="Logo SRC" class="footer-tl-logo">
+      <span class="footer-tl-text">Spine Research Community</span>
+    </div>
+    <span class="footer-tl-meta">#00/12 · 2026-04-29</span>
+  </div>
+</section>
+
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    }
+  }, { threshold: 0.25 });
+  document.querySelectorAll('section[data-snap="true"]').forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>

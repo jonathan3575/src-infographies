@@ -35,6 +35,6 @@ publish-all:
 	$(PY) -m src.publish --all
 
 deploy: publish-all
-	git add public/
-	git commit -m "Deploy public/ — $$(date +%Y-%m-%d)"
+	git add docs/
+	git commit -m "Deploy docs/ — $$(date +%Y-%m-%d)"
 	git push origin main

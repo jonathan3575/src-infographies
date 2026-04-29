@@ -1,11 +1,12 @@
-"""Publie les versions FINALES des TL HTML dans public/ pour GitHub Pages.
+"""Publie les versions FINALES des TL HTML dans docs/ pour GitHub Pages.
 
-- public/{ID}/index.html  : dernière version validée du TL pour chaque planche
-- public/assets/...        : assets réellement référencés, copiés depuis assets/
-- public/index.html        : page d'accueil listant les planches publiées
+- docs/{ID}/index.html   : dernière version validée du TL pour chaque planche
+- docs/assets/...        : assets réellement référencés, copiés depuis assets/
+- docs/index.html        : page d'accueil listant les planches publiées
 
 Les chemins file:///... absolus présents dans les TL HTML sont réécrits en
 chemins relatifs ../assets/... pour fonctionner sous GitHub Pages.
+GitHub Pages source = branch main, path /docs.
 """
 from __future__ import annotations
 
@@ -21,7 +22,7 @@ import click
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data" / "questionnaires"
 TL_DIR = ROOT / "output" / "tl"
-PUBLIC_DIR = ROOT / "public"
+PUBLIC_DIR = ROOT / "docs"
 PUBLIC_ASSETS_DIR = PUBLIC_DIR / "assets"
 
 ROOT_URI_PREFIX = ROOT.as_uri() + "/"
@@ -111,7 +112,7 @@ def publish_one(qid: str) -> dict:
     for a in copied:
         copy_asset(a)
 
-    click.echo(f"  [ok] {qid} v{version} → public/{qid}/index.html  ({len(copied)} assets)")
+    click.echo(f"  [ok] {qid} v{version} → docs/{qid}/index.html  ({len(copied)} assets)")
     return {
         "id": qid,
         "version": version,
@@ -359,7 +360,7 @@ def main(questionnaires: tuple[str, ...], publish_all: bool) -> None:
     click.echo(f"  [ok] index → {index_path.relative_to(ROOT)}")
 
     total = dir_size(PUBLIC_DIR)
-    click.echo(f"public/ : {fmt_size(total)}")
+    click.echo(f"docs/ : {fmt_size(total)}")
 
 
 if __name__ == "__main__":
