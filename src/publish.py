@@ -429,7 +429,6 @@ CARD_TEMPLATE = """    <a class="card__CLASS_EXTRA__" href="./__ID__/">
       <div class="card-tag">__CARD_TAG__</div>
       <div class="card-id">__ID__</div>
       <div class="card-titre">__TITRE__</div>
-      <div class="card-sub">__SUB__</div>
       <div class="card-meta">__META__</div>
     </a>"""
 
@@ -462,7 +461,6 @@ def render_index(published: list[dict]) -> str:
         replacements = {
             "__ID__": p["id"],
             "__TITRE__": p.get("titre", p["id"]),
-            "__SUB__": p.get("sous_titre") or "",
             "__META__": " · ".join(meta_bits),
             "__CLASS_EXTRA__": class_extra,
             "__CARD_TAG__": card_tag,
