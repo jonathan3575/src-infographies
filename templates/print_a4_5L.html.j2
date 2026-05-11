@@ -43,7 +43,7 @@
   [data-zone="header"] {
     background: var(--src-navy);
     color: var(--cream);
-    padding: 1.6mm 4mm;
+    padding: 1.2mm 4mm;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 4mm;
@@ -86,7 +86,7 @@
     background: white;
     border: 0.2mm solid var(--border);
     border-radius: 2mm;
-    padding: 1.2mm 4mm;
+    padding: 0.8mm 4mm;
     align-items: center;
   }
   .identity-cell .label {
@@ -273,8 +273,8 @@
     text-align: center;
   }
   .rachis-svg {
-    width: 24mm;
-    height: 22mm;
+    width: 20mm;
+    height: 18mm;
   }
 
   /* AXES 3/4/5 — items inline compacts */
@@ -297,7 +297,7 @@
   /* AXES 3+4+5 sur une rangée 2col-1col */
   .axes-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     gap: 1.3mm;
   }
 
@@ -568,9 +568,20 @@
     </div>
   </div>
 
-  {# AXES 3, 4 — rangée 2col compact #}
+  {# AXE 3 — ligne entière #}
+  {% set ax3 = q.axes[2] %}
+  <div class="axe compact {{ ax3.criticite }}">
+    <div class="axe-head">
+      <h3 class="axe-title">{{ ax3.nom }}</h3>
+    </div>
+    <ul class="axe-items">
+      {% for it in ax3["items"] %}<li>{{ it }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  {# AXES 4 + 5 — rangée 2col compact #}
   <div class="axes-row">
-    {% for ax in q.axes[2:4] %}
+    {% for ax in q.axes[3:5] %}
       <div class="axe compact {{ ax.criticite }}">
         <div class="axe-head">
           <h3 class="axe-title">{{ ax.nom }}</h3>
@@ -580,16 +591,6 @@
         </ul>
       </div>
     {% endfor %}
-  </div>
-
-  {% set ax5 = q.axes[4] %}
-  <div class="axe compact {{ ax5.criticite }}">
-    <div class="axe-head">
-      <h3 class="axe-title">{{ ax5.nom }}</h3>
-    </div>
-    <ul class="axe-items">
-      {% for it in ax5["items"] %}<li>{{ it }}</li>{% endfor %}
-    </ul>
   </div>
 
   <section data-zone="valeur">
