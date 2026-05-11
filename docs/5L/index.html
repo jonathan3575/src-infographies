@@ -28,8 +28,7 @@
 
   html, body {
     max-width: 100vw;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     background: var(--bg);
     color: var(--white);
     font-family: var(--font-body);
@@ -46,33 +45,19 @@
   section[data-snap="true"] {
     width: 100%;
     max-width: 100vw;
-    padding: 6vh 6vw;
-    display: flex;
-    flex-direction: column;
+    padding: 5vh 6vw;
+    display: flex; flex-direction: column;
     gap: clamp(12px, 2vh, 24px);
     scroll-snap-align: start;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  section[data-snap="true"].visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  section[data-snap="true"].visible { opacity: 1; transform: translateY(0); }
 
-  /* ==========  SECTION 1 — Hero  ========== */
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .logo-tl {
-    width: clamp(48px, 9vw, 88px);
-    height: auto;
-    object-fit: contain;
-  }
+  /* HERO */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .logo-tl { width: clamp(48px, 9vw, 88px); height: auto; object-fit: contain; }
   .topbar-meta {
     font-family: var(--font-mono);
     font-size: clamp(11px, 2.5vw, 22px);
@@ -81,12 +66,7 @@
     text-align: right;
     white-space: nowrap;
   }
-
-  [data-zone="header"] {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(4px, 1vh, 12px);
-  }
+  [data-zone="header"] { display: flex; flex-direction: column; gap: clamp(4px, 1vh, 12px); }
   .questionnaire-tag {
     font-family: var(--font-mono);
     font-size: clamp(11px, 2.5vw, 28px);
@@ -96,82 +76,66 @@
   }
   .code-huge {
     font-family: var(--font-display);
-    font-size: clamp(96px, 26vw, 280px);
+    font-size: clamp(80px, 22vw, 240px);
     line-height: 0.85;
     color: var(--teal);
     letter-spacing: 1px;
   }
   .title-tl {
     font-family: var(--font-display);
-    font-size: clamp(26px, 7vw, 72px);
+    font-size: clamp(26px, 7vw, 64px);
     line-height: 1;
     color: var(--white);
     letter-spacing: 0.5px;
-    word-break: normal;
     overflow-wrap: anywhere;
+  }
+  .sub-tl {
+    font-size: clamp(14px, 3.2vw, 24px);
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  [data-zone="hero"] {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: clamp(8px, 1.5vh, 14px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-screenshot {
+    width: 100%; max-width: 100%; height: auto;
+    object-fit: contain;
+    background: var(--bg2);
+    border-radius: 8px;
   }
 
   [data-zone="identity"] {
     background: var(--bg2);
     border: 1px solid rgba(255,255,255,0.07);
-    padding: clamp(12px, 2vh, 20px) clamp(14px, 3vw, 28px);
+    border-radius: 10px;
+    padding: clamp(10px, 1.6vh, 16px) clamp(14px, 3vw, 24px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: clamp(12px, 3vw, 32px);
     row-gap: clamp(6px, 1.2vh, 12px);
   }
-  .identity-cell-tl {
-    display: flex;
-    align-items: baseline;
-    gap: clamp(6px, 1.5vw, 12px);
-    flex-wrap: wrap;
-    min-width: 0;
-  }
-  .identity-cell-tl .label-tl,
-  .identity-cell-tl .value-tl {
-    font-size: clamp(13px, 3vw, 24px);
-    line-height: 1.2;
-  }
+  .identity-cell-tl { display: flex; align-items: baseline; gap: clamp(6px, 1.5vw, 12px); flex-wrap: wrap; min-width: 0; }
+  .identity-cell-tl .label-tl, .identity-cell-tl .value-tl { font-size: clamp(13px, 3vw, 24px); line-height: 1.2; }
   .identity-cell-tl .label-tl {
     font-family: var(--font-mono);
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 1.5px;
   }
-  .identity-cell-tl .value-tl {
-    font-weight: 600;
-    color: var(--white);
-  }
-
-  [data-zone="hero"] {
-    background: var(--bg2);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 8px;
-    padding: clamp(8px, 1.5vh, 16px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-screenshot {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    background: var(--bg2);
-    border-radius: 4px;
-  }
+  .identity-cell-tl .value-tl { font-weight: 600; color: var(--white); }
 
   [data-zone="frise"] {
     background: var(--bg3);
     padding: clamp(8px, 1.2vh, 12px) clamp(10px, 2.5vw, 20px);
-    border-radius: 4px;
+    border-radius: 8px;
   }
-  .frise-flow-tl {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(4px, 0.8vw, 8px);
-    align-items: center;
-  }
+  .frise-flow-tl { display: flex; flex-wrap: wrap; gap: clamp(4px, 0.8vw, 8px); align-items: center; }
   .frise-step-tl {
     font-family: var(--font-mono);
     font-size: clamp(11px, 2.2vw, 18px);
@@ -179,27 +143,18 @@
     padding: clamp(2px, 0.5vh, 5px) clamp(5px, 1.2vw, 10px);
     background: var(--bg2);
     border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
     line-height: 1;
   }
   .frise-step-tl.active {
-    color: var(--bg);
-    background: var(--teal);
-    border-color: var(--teal);
-    font-weight: 700;
+    color: var(--bg); background: var(--teal); border-color: var(--teal); font-weight: 700;
   }
 
-  /* ==========  SECTION 2 — Disrupteur  ========== */
-
-  .section-disrupteur {
-    padding: 10vh 6vw;
-  }
+  /* DISRUPTEUR */
+  .section-disrupteur { padding: 10vh 6vw; }
   [data-zone="disrupteur"] {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
     gap: clamp(8px, 1.5vh, 16px);
   }
   .disrupteur-tag-tl {
@@ -209,179 +164,180 @@
     letter-spacing: clamp(2px, 1vw, 8px);
     text-transform: uppercase;
   }
-  .disrupteur-line {
+  .disrupteur-num-tl {
     font-family: var(--font-display);
-    font-size: clamp(64px, 16vw, 200px);
-    line-height: 0.95;
+    font-size: clamp(120px, 30vw, 320px);
+    line-height: 0.85;
     color: var(--gold);
     letter-spacing: 1px;
-    word-break: normal;
+  }
+  .disrupteur-unit-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 3vw, 26px);
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: clamp(8px, 2vh, 24px);
+  }
+  .disrupteur-main-tl {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 10vw, 88px);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.5px;
     overflow-wrap: anywhere;
   }
-  .disrupteur-arrow-tl {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 12vw, 140px);
-    color: var(--white);
-    line-height: 1;
-  }
   .disrupteur-sec-tl {
-    font-size: clamp(18px, 5vw, 36px);
+    font-size: clamp(16px, 4vw, 30px);
     color: var(--muted);
-    margin-top: clamp(20px, 4vh, 60px);
+    margin-top: clamp(16px, 3vh, 40px);
     line-height: 1.4;
-    max-width: 100%;
   }
 
-  /* ==========  SECTION 3 — Champs / axes  ========== */
-
-  .section-champs {
-    padding: 8vh 6vw;
-  }
+  /* AXES */
+  .section-axes { padding: 6vh 6vw; }
   .section-tag {
     font-family: var(--font-mono);
-    font-size: clamp(11px, 2.5vw, 28px);
+    font-size: clamp(11px, 2.5vw, 24px);
     letter-spacing: clamp(2px, 1vw, 8px);
     color: var(--muted);
     text-transform: uppercase;
   }
   .section-title-tl {
     font-family: var(--font-display);
-    font-size: clamp(40px, 10vw, 80px);
+    font-size: clamp(36px, 9vw, 72px);
     line-height: 1;
     color: var(--teal);
     letter-spacing: 0.5px;
-    margin-top: clamp(4px, 0.8vh, 12px);
-    margin-bottom: clamp(12px, 2vh, 24px);
+    margin: clamp(4px, 0.8vh, 12px) 0 clamp(14px, 2vh, 22px) 0;
   }
-  .champs-list-tl {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(8px, 1.5vh, 14px);
-  }
-  .champs-card-tl {
+  .axe-tl {
     background: var(--bg2);
-    border-left: clamp(3px, 0.7vw, 6px) solid var(--teal);
-    padding: clamp(10px, 1.8vh, 18px) clamp(14px, 3.5vw, 28px);
+    border-radius: 10px;
+    padding: clamp(12px, 1.8vh, 18px) clamp(14px, 3vw, 22px);
+    border-left: clamp(4px, 0.8vw, 6px) solid var(--teal);
+    margin-bottom: clamp(8px, 1.4vh, 14px);
   }
-  .champs-card-tl.critique {
-    border-left-color: var(--gold);
-    background: var(--bg3);
-  }
-  .champs-card-tl.normale { border-left-color: var(--muted); }
-  .champs-card-title {
+  .axe-tl.critique { border-left-color: var(--gold); background: var(--bg3); }
+  .axe-tl.normale { border-left-color: var(--muted); }
+  .axe-title-tl {
     font-family: var(--font-display);
-    font-size: clamp(20px, 4.5vw, 38px);
-    line-height: 1.1;
+    font-size: clamp(22px, 5vw, 40px);
     color: var(--white);
+    line-height: 1.05;
     letter-spacing: 0.3px;
     margin-bottom: clamp(4px, 0.8vh, 8px);
   }
-  .champs-card-items {
-    font-size: clamp(13px, 3vw, 22px);
-    line-height: 1.35;
-    color: var(--muted);
-  }
-  .champs-card-items strong { color: var(--white); font-weight: 600; }
-
-  .badges-row-tl {
-    margin-top: clamp(14px, 2.5vh, 24px);
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(6px, 1.5vw, 12px);
-    align-items: center;
-  }
-  .badges-label-tl {
+  .axe-sub-tl {
     font-family: var(--font-mono);
     font-size: clamp(10px, 2vw, 16px);
-    letter-spacing: 1.5px;
     color: var(--muted);
-    text-transform: uppercase;
-    margin-right: clamp(4px, 1vw, 8px);
-  }
-  .badge-tl {
-    font-family: var(--font-display);
-    font-size: clamp(18px, 4vw, 32px);
-    color: var(--teal);
-    background: var(--bg3);
-    border: 1px solid var(--teal-dim);
-    padding: clamp(4px, 0.8vh, 8px) clamp(10px, 2.5vw, 18px);
     letter-spacing: 1px;
-    line-height: 1;
+    margin-bottom: clamp(6px, 1.2vh, 12px);
   }
 
-  .encart-special-tl {
-    margin-top: clamp(14px, 2.5vh, 22px);
-    background: rgba(240, 180, 41, 0.10);
-    border-left: clamp(3px, 0.7vw, 6px) solid var(--gold);
-    padding: clamp(14px, 2.5vh, 22px) clamp(14px, 3.5vw, 28px);
+  /* AXE 1 — voies hiérarchisées */
+  .voies-tl {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(8px, 1.4vh, 12px);
+    margin-top: clamp(6px, 1vh, 10px);
   }
-  .encart-special-tl h3 {
+  .voie-card-tl {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: clamp(10px, 1.5vh, 14px) clamp(12px, 2.8vw, 20px);
+    border: 1px solid rgba(0, 212, 180, 0.20);
+  }
+  .voie-name-tl {
     font-family: var(--font-display);
-    font-size: clamp(22px, 5vw, 40px);
-    color: var(--gold);
-    line-height: 1.05;
-    margin-bottom: clamp(6px, 1vh, 10px);
-    letter-spacing: 0.3px;
+    font-size: clamp(40px, 10vw, 80px);
+    line-height: 0.9;
+    color: var(--teal);
+    letter-spacing: 2px;
+    margin-bottom: clamp(4px, 0.8vh, 8px);
+    padding-bottom: clamp(4px, 0.8vh, 8px);
+    border-bottom: 2px solid var(--teal);
   }
-  .encart-special-tl p {
-    font-size: clamp(14px, 3vw, 22px);
-    color: var(--white);
-    line-height: 1.4;
-    margin-bottom: clamp(8px, 1.2vh, 12px);
-  }
-  .encart-special-tl ul {
+  .voie-items-tl {
     list-style: none;
-    margin-bottom: clamp(8px, 1.2vh, 12px);
+    margin: 0; padding: 0;
   }
-  .encart-special-tl li {
+  .voie-items-tl li {
+    font-size: clamp(13px, 2.8vw, 22px);
+    color: var(--white);
+    padding: clamp(2px, 0.4vh, 4px) 0;
+    line-height: 1.3;
+  }
+
+  /* AXE 2 — schéma + items */
+  .rachis-tl {
+    display: grid;
+    grid-template-columns: clamp(120px, 22vw, 200px) 1fr;
+    gap: clamp(12px, 3vw, 24px);
+    align-items: center;
+    margin-top: clamp(4px, 0.8vh, 8px);
+  }
+  .rachis-svg-tl {
+    width: 100%; height: auto;
+    max-height: clamp(220px, 36vh, 360px);
+  }
+  .rachis-items-tl {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .rachis-items-tl li {
     font-family: var(--font-mono);
-    font-size: clamp(12px, 2.6vw, 20px);
+    font-size: clamp(13px, 2.8vw, 22px);
     color: var(--white);
-    padding: clamp(4px, 0.8vh, 7px) 0;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: clamp(6px, 1vh, 10px) 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.10);
+    line-height: 1.3;
   }
-  .encart-special-tl li:last-child {
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+  .rachis-items-tl li:last-child { border-bottom: 0; }
+
+  /* AXES 3,4,5 — items inline */
+  .axe-items-tl {
+    list-style: none;
+    margin: 0; padding: 0;
   }
-  .encart-special-tl .encart-msg-tl {
-    font-family: var(--font-display);
-    font-size: clamp(22px, 5vw, 40px);
+  .axe-items-tl li {
+    font-size: clamp(14px, 3vw, 24px);
     color: var(--white);
-    line-height: 1.05;
-    margin-bottom: 0;
+    padding: clamp(3px, 0.6vh, 6px) 0;
+    line-height: 1.3;
+  }
+  .axe-items-tl li::before {
+    content: "▹  ";
+    color: var(--teal);
+    font-weight: 700;
   }
 
-  /* ==========  SECTION 4 — Pourquoi (gold) + footer  ========== */
-
-  .section-valeur {
-    padding: 8vh 6vw 4vh;
-  }
+  /* VALEUR + FOOTER */
+  .section-valeur { padding: 8vh 6vw 4vh; }
   [data-zone="valeur"] {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     background: rgba(240, 180, 41, 0.08);
     border-left: clamp(4px, 1vw, 8px) solid var(--gold);
-    padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 44px);
+    border-radius: 0 10px 10px 0;
+    padding: clamp(20px, 4vh, 36px) clamp(16px, 4vw, 40px);
   }
   [data-zone="valeur"] .valeur-tag {
     font-family: var(--font-mono);
-    font-size: clamp(11px, 2.5vw, 24px);
+    font-size: clamp(11px, 2.5vw, 22px);
     letter-spacing: clamp(2px, 1vw, 6px);
     color: var(--muted);
     text-transform: uppercase;
   }
   [data-zone="valeur"] h2 {
     font-family: var(--font-display);
-    font-size: clamp(34px, 9vw, 70px);
-    line-height: 0.95;
+    font-size: clamp(32px, 8vw, 64px);
+    line-height: 1;
     color: var(--gold);
-    margin: clamp(4px, 0.8vh, 8px) 0 clamp(14px, 2.5vh, 28px) 0;
+    margin: clamp(4px, 0.8vh, 8px) 0 clamp(14px, 2vh, 24px) 0;
   }
-  [data-zone="valeur"] ul {
-    list-style: none;
-  }
+  [data-zone="valeur"] ul { list-style: none; }
   [data-zone="valeur"] li {
     font-size: clamp(14px, 3.2vw, 26px);
     line-height: 1.4;
@@ -389,22 +345,21 @@
     padding: clamp(8px, 1.4vh, 14px) 0;
     border-top: 1px solid rgba(255,255,255,0.07);
   }
-  [data-zone="valeur"] li:last-child {
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-  }
+  [data-zone="valeur"] li:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
   [data-zone="valeur"] li.first-point-tl {
     font-family: var(--font-display);
-    font-size: clamp(26px, 6.5vw, 48px);
+    font-size: clamp(24px, 6vw, 44px);
     line-height: 1.05;
     color: var(--white);
     background: rgba(240, 180, 41, 0.18);
-    padding: clamp(14px, 2.5vh, 24px) clamp(14px, 3vw, 28px);
+    padding: clamp(14px, 2.5vh, 22px) clamp(14px, 3vw, 24px);
     margin: 0 0 clamp(8px, 1.5vh, 12px) 0;
     border-left: clamp(4px, 1vw, 6px) solid var(--gold);
+    border-radius: 0 8px 8px 0;
     border-top: 0;
   }
   .note-finale-tl {
-    margin-top: clamp(12px, 2vh, 18px);
+    margin-top: clamp(10px, 1.8vh, 16px);
     font-family: var(--font-mono);
     font-size: clamp(12px, 2.4vw, 20px);
     color: var(--muted);
@@ -414,30 +369,18 @@
     border-top: 1px dashed rgba(255,255,255,0.10);
     border-bottom: 1px dashed rgba(255,255,255,0.10);
   }
-
   [data-zone="footer"] {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
     padding-top: clamp(12px, 2vh, 16px);
-    margin-top: clamp(12px, 2vh, 24px);
+    margin-top: clamp(10px, 1.8vh, 20px);
     border-top: 1px solid rgba(255,255,255,0.07);
   }
-  .footer-tl-left {
-    display: flex;
-    align-items: center;
-    gap: clamp(8px, 1.5vw, 16px);
-  }
-  .footer-tl-logo {
-    width: clamp(40px, 5vw, 64px);
-    height: auto;
-    object-fit: contain;
-  }
+  .footer-tl-left { display: flex; align-items: center; gap: clamp(8px, 1.5vw, 16px); }
+  .footer-tl-logo { width: clamp(40px, 5vw, 64px); height: auto; object-fit: contain; }
   .footer-tl-text {
     font-family: var(--font-display);
-    font-size: clamp(16px, 3.5vw, 28px);
+    font-size: clamp(16px, 3.5vw, 26px);
     color: var(--white);
     letter-spacing: 0.5px;
   }
@@ -452,7 +395,7 @@
 <body data-tl-format="1080x1920">
 
 
-<!-- SECTION 1 — Hero -->
+<!-- SECTION 1 — Hero (header + photo + identity + frise) -->
 <section data-snap="true" class="section-hero">
   <div class="topbar">
     <img src="../assets/brand/logo_src.jpeg" alt="Logo SRC" class="logo-tl">
@@ -463,6 +406,11 @@
     <div class="questionnaire-tag">Questionnaire</div>
     <div class="code-huge">5L</div>
     <h1 class="title-tl">Programmation chirurgie lombaire</h1>
+    <p class="sub-tl">Tout pour le bloc, sur une page</p>
+  </div>
+
+  <div data-zone="hero">
+      <img src="../assets/screenshots/follow/5L_part1.png" alt="Follow 5L part 1" class="hero-screenshot">
   </div>
 
   <div data-zone="identity">
@@ -472,16 +420,12 @@
     </div>
     <div class="identity-cell-tl">
       <span class="label-tl">Durée chir</span>
-      <span class="value-tl">≈ 2 minutes</span>
+      <span class="value-tl">≈ 1 minute</span>
     </div>
       <div class="identity-cell-tl">
         <span class="label-tl">Chirurgien</span>
         <span class="value-tl">100%</span>
       </div>
-  </div>
-
-  <div data-zone="hero">
-      <img src="../assets/screenshots/follow/5L_part1.png" alt="Follow 5L part 1" class="hero-screenshot">
   </div>
 
   <div data-zone="frise">
@@ -508,55 +452,135 @@
 <section data-snap="true" class="section-disrupteur">
   <div data-zone="disrupteur">
     <div class="disrupteur-tag-tl">Le chiffre</div>
-      <div class="disrupteur-line">1 page</div>
-      <div class="disrupteur-arrow-tl">→</div>
-      <div class="disrupteur-line">bloc prêt</div>
-    <p class="disrupteur-sec-tl">Ces 4 axes = tout ce dont le bloc a besoin.</p>
+    <div class="disrupteur-num-tl">5</div>
+    <div class="disrupteur-unit-tl">AXES</div>
+    <div class="disrupteur-main-tl">5 axes  →  bloc prêt</div>
+    <p class="disrupteur-sec-tl">Tout ce dont le bloc a besoin en une page.</p>
   </div>
 </section>
 
 
-<!-- SECTION 3 — Champs (toutes les sections) + extras -->
-<section data-snap="true" class="section-champs">
+<!-- SECTION 3 — Axe 1 + Axe 2 -->
+<section data-snap="true" class="section-axes">
   <div class="section-tag">Pour toi</div>
-  <h2 class="section-title-tl">Tout pour le bloc, sur une page</h2>
-  <ul class="champs-list-tl">
-      <li class="champs-card-tl critique">
-        <div class="champs-card-title">Axe 1 — Voie d&#39;abord</div>
-        <div class="champs-card-items">Postérieure : cure de hernie · libération · fixation · ostéotomie (ponte/OTP) · stab dynamique · vertébroplastie · Postérieure mini-invasive : endo UBE/Mono · percutanée · TLIF · navigation · Antérieure : ALIF 1 niv · ALIF 2 niv · prothèse · hybride · autre — côté G/D · Latérale : LLIF · XLIF · corporectomie — côté G/D · Abord combiné : O/N + séquence (ANT/POST, POST/ANT, LAT/POST, ANT/LAT, POST/ANT/POST) + date 2e temps si différé</div>
-      </li>
-      <li class="champs-card-tl haute">
-        <div class="champs-card-title">Axe 2 — Niveaux instrumentés</div>
-        <div class="champs-card-items">Postérieur : sup L5→T12 / inf S1→L1 ou Bassin · Latéral : sup L1→L5 / inf L2→S1 ou Iliaque · Antérieur : L5S1 → L1L2</div>
-      </li>
-      <li class="champs-card-tl normale">
-        <div class="champs-card-title">Axe 3 — Matériel</div>
-        <div class="champs-card-items">Vis · cages · plaques · prothèses · ciment · Préciser le matériel selon ton protocole habituel.</div>
-      </li>
-      <li class="champs-card-tl haute">
-        <div class="champs-card-title">Axe 4 — Contexte &amp; séjour</div>
-        <div class="champs-card-items">Chir sur région déjà opérée : O/N → si OUI : type (HD/libé, arthrodèse post/ant, autre) + niveau + année + commentaire · Type de séjour : hospitalisation traditionnelle / ambulatoire · Date d&#39;intervention : libre</div>
-      </li>
-  </ul>
+  <h2 class="section-title-tl">Voie d'abord + niveaux</h2>
 
+  <div class="axe-tl critique">
+    <div class="axe-title-tl">Axe 1 — Voie d&#39;abord</div>
+<div class="axe-sub-tl">Choisis la voie, puis le détail.</div>    <div class="voies-tl">
+        <div class="voie-card-tl">
+          <div class="voie-name-tl">POST</div>
+          <ul class="voie-items-tl">
+<li>Cure de hernie · libération · fixation</li><li>Ostéotomie (ponte / OTP)</li><li>Stab dynamique · vertébroplastie</li><li>Mini-invasif : endo UBE/Mono · percutanée · TLIF · navigation</li>          </ul>
+        </div>
+        <div class="voie-card-tl">
+          <div class="voie-name-tl">ANT</div>
+          <ul class="voie-items-tl">
+<li>ALIF 1 niv · ALIF 2 niv</li><li>Prothèse · hybride · autre</li><li>Côté G / D</li>          </ul>
+        </div>
+        <div class="voie-card-tl">
+          <div class="voie-name-tl">LAT</div>
+          <ul class="voie-items-tl">
+<li>LLIF · XLIF · corporectomie</li><li>Côté G / D</li>          </ul>
+        </div>
+    </div>
+  </div>
 
+  <div class="axe-tl haute">
+    <div class="axe-title-tl">Axe 2 — Niveaux instrumentés</div>
+    <div class="rachis-tl">
+      <svg class="rachis-svg-tl" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vert-tl" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F0EDE8"/>
+            <stop offset="100%" stop-color="#6B7280"/>
+          </linearGradient>
+        </defs>
+          <rect x="30" y="8" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="20" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="17" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">T12</text>
+          <rect x="30" y="26" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="38" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="35" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">L1</text>
+          <rect x="30" y="44" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="56" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="53" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">L2</text>
+          <rect x="30" y="62" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="74" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="71" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">L3</text>
+          <rect x="30" y="80" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="92" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="89" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">L4</text>
+          <rect x="30" y="98" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+            <rect x="34" y="110" width="30" height="4" rx="1.5" ry="1.5"
+                  fill="#00D4B4" opacity="0.5"/>
+          <text x="74" y="107" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">L5</text>
+          <rect x="30" y="116" width="38" height="12" rx="3" ry="3"
+                fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+          <text x="74" y="125" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">S1</text>
+      </svg>
+      <ul class="rachis-items-tl">
+<li>POST · sup L5→T12 / inf S1→L1 ou Bassin</li><li>LAT · sup L1→L5 / inf L2→S1 ou Iliaque</li><li>ANT · L5S1 → L1L2</li>      </ul>
+    </div>
+  </div>
 </section>
 
 
-<!-- SECTION 4 — Pourquoi + footer -->
+<!-- SECTION 4 — Axes 3, 4, 5 -->
+<section data-snap="true" class="section-axes">
+  <div class="section-tag">Suite</div>
+  <h2 class="section-title-tl">Matériel · antécédent · séjour</h2>
+
+    <div class="axe-tl normale">
+      <div class="axe-title-tl">Axe 3 — Matériel</div>
+      <ul class="axe-items-tl">
+<li>Dispositif</li><li>Laboratoire</li>      </ul>
+    </div>
+    <div class="axe-tl haute">
+      <div class="axe-title-tl">Axe 4 — Antécédent de chir</div>
+      <ul class="axe-items-tl">
+<li>Région opérée · niveau · année</li>      </ul>
+    </div>
+    <div class="axe-tl haute">
+      <div class="axe-title-tl">Axe 5 — Séjour</div>
+      <ul class="axe-items-tl">
+<li>Date d&#39;intervention</li><li>Type de séjour : hospitalisation traditionnelle / ambulatoire</li>      </ul>
+    </div>
+</section>
+
+
+<!-- SECTION 5 — Valeur + footer -->
 <section data-snap="true" class="section-valeur">
   <div data-zone="valeur">
     <div class="valeur-tag">Pourquoi ça compte</div>
     <h2>Cette fiche → dossier de prog chir</h2>
     <ul>
-        <li class="first-point-tl">Le A4 doit être scannable en 10 secondes par secrétaire + chir.</li>
-        <li>Voie d&#39;abord + niveaux + matériel + contexte : rien ne manque, rien ne traîne.</li>
+        <li class="first-point-tl">Lisible en un coup d&#39;œil par secrétaire + chir.</li>
+        <li>Voie d&#39;abord + niveaux + matériel + antécédent + séjour : rien ne manque, rien ne traîne.</li>
         <li>Scoliose : hors 5L, réservée à la série scoliose à venir.</li>
         <li>Une fois cette case complète, la programmation peut partir au bloc.</li>
     </ul>
   </div>
 
-  <div class="note-finale-tl">Cette fiche finit dans le dossier de programmation chirurgicale.</div>
+  <div class="note-finale-tl">Cette fiche lisible en un coup d&#39;œil → dossier de prog chir.</div>
 
   <div data-zone="footer">
     <div class="footer-tl-left">
@@ -571,9 +595,7 @@
 <script>
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
+      if (e.isIntersecting) e.target.classList.add('visible');
     }
   }, { threshold: 0.25 });
   document.querySelectorAll('section[data-snap="true"]').forEach(s => io.observe(s));
