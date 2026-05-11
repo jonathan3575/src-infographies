@@ -11,7 +11,7 @@
   ],
   "duree_estimee_chir": "≈ 1 minute",
   "screenshot_follow": [
-    "assets/screenshots/follow/5L_part1.png"
+    "assets/screenshots/follow/5L_part1_crop.png"
   ],
   "axes": [
     {
@@ -61,7 +61,7 @@
       "sous_titre": "",
       "criticite": "normale",
       "items": [
-        "Dispositif : vis · cages · plaques · prothèses · ciment",
+        "Dispositif : vis · cages · plaques · prothèses · dispositif",
         "Laboratoire"
       ]
     },
