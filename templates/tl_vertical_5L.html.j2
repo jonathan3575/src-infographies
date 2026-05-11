@@ -474,25 +474,42 @@
   <div class="axe-tl {{ ax2.criticite }}">
     <div class="axe-title-tl">{{ ax2.nom }}</div>
     <div class="rachis-tl">
-      <svg class="rachis-svg-tl" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+      <svg class="rachis-svg-tl" viewBox="0 0 100 168" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="vert-tl" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#F0EDE8"/>
             <stop offset="100%" stop-color="#6B7280"/>
           </linearGradient>
         </defs>
-        {% set levels = ["T12", "L1", "L2", "L3", "L4", "L5", "S1"] %}
-        {% for lvl in levels %}
-          {% set y = 8 + loop.index0 * 18 %}
-          <rect x="30" y="{{ y }}" width="38" height="12" rx="3" ry="3"
+        {% set vertebres_tl = [
+          {"y": 6,   "w": 38, "x": 31, "lbl": "T12"},
+          {"y": 22,  "w": 40, "x": 30, "lbl": "L1"},
+          {"y": 38,  "w": 42, "x": 29, "lbl": "L2"},
+          {"y": 54,  "w": 44, "x": 28, "lbl": "L3"},
+          {"y": 70,  "w": 46, "x": 27, "lbl": "L4"},
+          {"y": 86,  "w": 48, "x": 26, "lbl": "L5"},
+          {"y": 102, "w": 48, "x": 26, "lbl": "S1"}
+        ] %}
+        {% for v in vertebres_tl %}
+          <rect x="{{ v.x }}" y="{{ v.y }}" width="{{ v.w }}" height="11" rx="2.6" ry="2.6"
                 fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
           {% if not loop.last %}
-            <rect x="34" y="{{ y + 12 }}" width="30" height="4" rx="1.5" ry="1.5"
-                  fill="#00D4B4" opacity="0.5"/>
+            <rect x="{{ v.x + 3 }}" y="{{ v.y + 11 }}" width="{{ v.w - 6 }}" height="3.6"
+                  rx="1.4" ry="1.4" fill="#00D4B4" opacity="0.55"/>
           {% endif %}
-          <text x="74" y="{{ y + 9 }}" font-family="Space Mono, monospace"
-                font-size="7" fill="#F0EDE8">{{ lvl }}</text>
+          <text x="80" y="{{ v.y + 8 }}" font-family="Space Mono, monospace"
+                font-size="7" fill="#F0EDE8">{{ v.lbl }}</text>
         {% endfor %}
+        {# Sacrum #}
+        <polygon points="26,120 74,120 68,140 32,140"
+                 fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+        <text x="80" y="133" font-family="Space Mono, monospace"
+              font-size="7" fill="#F0EDE8">Bassin</text>
+        {# Ailes du bassin #}
+        <path d="M 32 140 Q 12 144 14 156 L 28 156 Q 28 150 32 144 Z"
+              fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
+        <path d="M 68 140 Q 88 144 86 156 L 72 156 Q 72 150 68 144 Z"
+              fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
       </svg>
       <ul class="rachis-items-tl">
         {% for it in ax2["items"] %}<li>{{ it }}</li>{% endfor %}

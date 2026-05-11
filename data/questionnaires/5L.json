@@ -33,14 +33,14 @@
           "items": [
             "ALIF 1 niv · ALIF 2 niv",
             "Prothèse · hybride · autre",
-            "Côté G / D"
+            "Abord G / D"
           ]
         },
         {
           "voie": "LAT",
           "items": [
             "LLIF · XLIF · corporectomie",
-            "Côté G / D"
+            "Abord G / D"
           ]
         }
       ]
@@ -61,7 +61,7 @@
       "sous_titre": "",
       "criticite": "normale",
       "items": [
-        "Dispositif",
+        "Dispositif : vis · cages · plaques · prothèses · ciment",
         "Laboratoire"
       ]
     },
@@ -95,8 +95,7 @@
       "Lisible en un coup d'œil par secrétaire + chir.",
       "Voie d'abord + niveaux + matériel + antécédent + séjour : rien ne manque, rien ne traîne.",
       "Scoliose : hors 5L, réservée à la série scoliose à venir.",
-      "Une fois cette case complète, la programmation peut partir au bloc."
+      "Une fois cette fiche complète, la programmation peut partir au bloc."
     ]
-  },
-  "note_finale": "Cette fiche lisible en un coup d'œil → dossier de prog chir."
+  }
 }

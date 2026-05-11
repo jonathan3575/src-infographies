@@ -226,40 +226,71 @@
     padding: 0.2mm 0;
   }
 
-  /* AXE 2 — schéma rachis + items */
+  /* AXE 2 — 2 échelles latérales + dessin central */
   .axe-rachis {
     display: grid;
-    grid-template-columns: 28mm 1fr;
-    gap: 3mm;
-    align-items: center;
-    margin-top: 0.4mm;
+    grid-template-columns: 1fr 28mm 1fr;
+    gap: 2mm;
+    align-items: stretch;
+    margin-top: 0.2mm;
   }
-  .rachis-svg {
-    width: 28mm;
-    height: 36mm;
+  .echelle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.6mm 0;
   }
-  .rachis-items {
-    margin: 0; padding: 0; list-style: none;
+  .echelle-label {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-bottom: 0.6mm;
   }
-  .rachis-items li {
+  .echelle.right {
+    text-align: right;
+  }
+  .echelle.right .echelle-label {
+    text-align: right;
+  }
+  .echelle-levels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+  }
+  .echelle-levels li {
     font-family: var(--font-mono);
     font-size: 9pt;
     color: var(--src-navy);
-    padding: 0.4mm 0;
-    line-height: 1.25;
-    border-bottom: 0.15mm dashed var(--border);
+    line-height: 1.05;
+    padding: 0.1mm 0;
   }
-  .rachis-items li:last-child { border-bottom: 0; }
+  .echelle.left .echelle-levels li { text-align: right; padding-right: 2mm; }
+  .echelle.right .echelle-levels li { text-align: left; padding-left: 2mm; }
+  .rachis-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rachis-svg {
+    width: 28mm;
+    height: 32mm;
+  }
 
-  /* AXE 3/4/5 — simple items inline */
+  /* AXES 3/4/5 — items inline compacts */
   .axe-items {
     margin: 0; padding: 0; list-style: none;
-    display: flex; flex-wrap: wrap; gap: 4mm;
+    display: flex; flex-wrap: wrap; gap: 0 4mm;
   }
   .axe-items li {
     font-size: 10pt;
     color: var(--text);
-    line-height: 1.25;
+    line-height: 1.2;
   }
   .axe-items li::before {
     content: "▹";
@@ -275,17 +306,23 @@
     gap: 1.3mm;
   }
 
-  /* VALEUR */
+  /* Compactage axes 3/4/5 — head et padding réduits */
+  .axe.compact { padding: 0.9mm 2.5mm; }
+  .axe.compact .axe-head { margin-bottom: 0.2mm; }
+  .axe.compact .axe-title { font-size: 11pt; }
+
+  /* VALEUR — cadre jaune élargi */
   [data-zone="valeur"] {
-    background: rgba(196, 143, 26, 0.08);
-    border-left: 2mm solid var(--critical);
+    background: rgba(196, 143, 26, 0.10);
+    border: 0.3mm solid rgba(196, 143, 26, 0.45);
+    border-left: 2.5mm solid var(--critical);
     border-radius: 0 2mm 2mm 0;
-    padding: 1.4mm 4mm;
+    padding: 1.6mm 4mm;
   }
   [data-zone="valeur"] h2 {
-    margin: 0 0 0.6mm 0;
+    margin: 0 0 0.8mm 0;
     font-family: var(--font-display);
-    font-size: 13pt;
+    font-size: 15pt;
     color: var(--critical);
     letter-spacing: 0.5pt;
     line-height: 1;
@@ -293,23 +330,23 @@
   [data-zone="valeur"] ul { margin: 0; padding-left: 4mm; }
   [data-zone="valeur"] li {
     font-size: 10pt;
-    margin-bottom: 0.2mm;
-    line-height: 1.22;
+    margin-bottom: 0.4mm;
+    line-height: 1.25;
     color: var(--text);
   }
   [data-zone="valeur"] li.first-point {
     font-family: var(--font-display);
-    font-size: 12pt;
+    font-size: 13pt;
     font-weight: 600;
     color: var(--src-navy);
-    line-height: 1.05;
+    line-height: 1.1;
     list-style: none;
     margin-left: -4mm;
-    padding: 0.7mm 2.5mm;
+    padding: 0.9mm 2.8mm;
     background: var(--cream);
-    border-left: 2mm solid var(--critical);
+    border-left: 2.5mm solid var(--critical);
     border-radius: 0 1.5mm 1.5mm 0;
-    margin-bottom: 0.6mm;
+    margin-bottom: 1mm;
   }
 
   .note-finale {
@@ -472,45 +509,74 @@
     </div>
   </div>
 
-  {# AXE 2 — rachis SVG + items #}
+  {# AXE 2 — 2 échelles (sup gauche / inf droite) + dessin central #}
   {% set ax2 = q.axes[1] %}
   <div class="axe {{ ax2.criticite }}">
     <div class="axe-head">
       <h3 class="axe-title">{{ ax2.nom }}</h3>
     </div>
     <div class="axe-rachis">
-      <svg class="rachis-svg" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="vert" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F8F6F1"/>
-            <stop offset="100%" stop-color="#E5E2DB"/>
-          </linearGradient>
-        </defs>
-        {# Liste niveaux du haut (T12) vers le bas (L5/S1) #}
-        {% set levels = ["T12", "L1", "L2", "L3", "L4", "L5", "S1"] %}
-        {% for lvl in levels %}
-          {% set y = 8 + loop.index0 * 17 %}
-          <rect x="32" y="{{ y }}" width="36" height="11" rx="2.4" ry="2.4"
-                fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.6"/>
-          {# disque sous chaque vertèbre sauf la dernière #}
-          {% if not loop.last %}
-            <rect x="36" y="{{ y + 11 }}" width="28" height="4" rx="1.5" ry="1.5"
-                  fill="#00A890" opacity="0.55"/>
-          {% endif %}
-          <text x="74" y="{{ y + 8 }}" font-family="Space Mono, monospace"
-                font-size="6.5" fill="#1E2D3D">{{ lvl }}</text>
-        {% endfor %}
-      </svg>
-      <ul class="rachis-items">
-        {% for it in ax2["items"] %}<li>{{ it }}</li>{% endfor %}
-      </ul>
+      <div class="echelle left">
+        <div class="echelle-label">Étage sup</div>
+        <ul class="echelle-levels">
+          {% for lvl in ["T12", "L1", "L2", "L3", "L4", "L5"] %}
+            <li>{{ lvl }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="rachis-center">
+        <svg class="rachis-svg" viewBox="0 0 50 84" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="vert" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F8F6F1"/>
+              <stop offset="100%" stop-color="#E5E2DB"/>
+            </linearGradient>
+          </defs>
+          {# 7 vertèbres T12 → S1 stylisées + sacrum/bassin trapèze #}
+          {% set vertebres = [
+            {"y": 4,  "w": 22, "x": 14},
+            {"y": 13, "w": 24, "x": 13},
+            {"y": 22, "w": 25, "x": 12.5},
+            {"y": 31, "w": 26, "x": 12},
+            {"y": 40, "w": 27, "x": 11.5},
+            {"y": 49, "w": 28, "x": 11},
+            {"y": 58, "w": 28, "x": 11}
+          ] %}
+          {% for v in vertebres %}
+            <rect x="{{ v.x }}" y="{{ v.y }}" width="{{ v.w }}" height="6"
+                  rx="1.6" ry="1.6"
+                  fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.5"/>
+            {% if not loop.last %}
+              <rect x="{{ v.x + 2 }}" y="{{ v.y + 6 }}" width="{{ v.w - 4 }}" height="2.4"
+                    rx="0.9" ry="0.9"
+                    fill="#00A890" opacity="0.55"/>
+            {% endif %}
+          {% endfor %}
+          {# Sacrum : trapèze descendant #}
+          <polygon points="11,67 39,67 36,76 14,76"
+                   fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.5"/>
+          {# Bassin : 2 arcs ailés #}
+          <path d="M 14 76 Q 4 78 5 82 L 11 82 Q 11 80 14 78 Z"
+                fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.5"/>
+          <path d="M 36 76 Q 46 78 45 82 L 39 82 Q 39 80 36 78 Z"
+                fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="echelle right">
+        <div class="echelle-label">Étage inf</div>
+        <ul class="echelle-levels">
+          {% for lvl in ["L1", "L2", "L3", "L4", "L5", "S1", "Bassin"] %}
+            <li>{{ lvl }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
 
-  {# AXES 3, 4, 5 — rangée 2col puis 1col #}
+  {# AXES 3, 4 — rangée 2col compact #}
   <div class="axes-row">
     {% for ax in q.axes[2:4] %}
-      <div class="axe {{ ax.criticite }}">
+      <div class="axe compact {{ ax.criticite }}">
         <div class="axe-head">
           <h3 class="axe-title">{{ ax.nom }}</h3>
         </div>
@@ -522,7 +588,7 @@
   </div>
 
   {% set ax5 = q.axes[4] %}
-  <div class="axe {{ ax5.criticite }}">
+  <div class="axe compact {{ ax5.criticite }}">
     <div class="axe-head">
       <h3 class="axe-title">{{ ax5.nom }}</h3>
     </div>
