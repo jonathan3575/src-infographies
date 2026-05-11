@@ -40,7 +40,7 @@
     },
     {
       "diagnostic": "Pseudarthrose",
-      "chirurgies": ["Fixation puis arthrodèse"],
+      "chirurgies": ["Fixation"],
       "niveau": "Niveau instrumenté",
       "criticite": "haute"
     },
