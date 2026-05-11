@@ -231,27 +231,27 @@
     margin-bottom: clamp(6px, 1.2vh, 12px);
   }
 
-  /* AXE 1 — voies hiérarchisées */
+  /* AXE 1 — voies hiérarchisées (3 colonnes PDF-like) */
   .voies-tl {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(8px, 1.4vh, 12px);
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: clamp(6px, 1.4vw, 12px);
     margin-top: clamp(6px, 1vh, 10px);
   }
   .voie-card-tl {
     background: var(--bg);
     border-radius: 8px;
-    padding: clamp(10px, 1.5vh, 14px) clamp(12px, 2.8vw, 20px);
+    padding: clamp(8px, 1.2vh, 12px) clamp(8px, 1.8vw, 14px);
     border: 1px solid rgba(0, 212, 180, 0.20);
   }
   .voie-name-tl {
     font-family: var(--font-display);
-    font-size: clamp(40px, 10vw, 80px);
+    font-size: clamp(26px, 6vw, 52px);
     line-height: 0.9;
     color: var(--teal);
-    letter-spacing: 2px;
-    margin-bottom: clamp(4px, 0.8vh, 8px);
-    padding-bottom: clamp(4px, 0.8vh, 8px);
+    letter-spacing: 1.5px;
+    margin-bottom: clamp(4px, 0.6vh, 6px);
+    padding-bottom: clamp(3px, 0.6vh, 6px);
     border-bottom: 2px solid var(--teal);
   }
   .voie-items-tl {
@@ -259,42 +259,65 @@
     margin: 0; padding: 0;
   }
   .voie-items-tl li {
-    font-size: clamp(13px, 2.8vw, 22px);
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 2.1vw, 17px);
     color: var(--white);
-    padding: clamp(2px, 0.4vh, 4px) 0;
-    line-height: 1.3;
+    padding: clamp(1px, 0.3vh, 3px) 0;
+    line-height: 1.25;
   }
 
-  /* AXE 2 — schéma + items */
+  /* AXE 2 — 2 échelles + rachis centré (miroir PDF) */
   .rachis-tl {
     display: grid;
-    grid-template-columns: clamp(120px, 22vw, 200px) 1fr;
-    gap: clamp(12px, 3vw, 24px);
-    align-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    gap: clamp(8px, 2vw, 18px);
+    align-items: stretch;
     margin-top: clamp(4px, 0.8vh, 8px);
   }
-  .rachis-svg-tl {
-    width: 100%; height: auto;
-    max-height: clamp(220px, 36vh, 360px);
+  .echelle-tl {
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(4px, 0.8vh, 8px) 0;
   }
-  .rachis-items-tl {
-    list-style: none;
-    margin: 0; padding: 0;
+  .echelle-tl ul {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
   }
-  .rachis-items-tl li {
+  .echelle-tl li {
     font-family: var(--font-mono);
-    font-size: clamp(13px, 2.8vw, 22px);
+    font-size: clamp(12px, 2.4vw, 20px);
     color: var(--white);
-    padding: clamp(6px, 1vh, 10px) 0;
-    border-bottom: 1px dashed rgba(255,255,255,0.10);
-    line-height: 1.3;
+    line-height: 1.1;
+    padding: clamp(1px, 0.2vh, 2px) 0;
   }
-  .rachis-items-tl li:last-child { border-bottom: 0; }
+  .echelle-tl.left li { text-align: right; padding-right: clamp(4px, 1vw, 10px); }
+  .echelle-tl.right li { text-align: left; padding-left: clamp(4px, 1vw, 10px); }
+  .rachis-center-tl {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
+    gap: clamp(2px, 0.4vh, 6px);
+  }
+  .rachis-label-tl {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 4.5vw, 36px);
+    color: var(--teal);
+    letter-spacing: 1.5px;
+    line-height: 1;
+    text-align: center;
+  }
+  .rachis-svg-tl {
+    width: clamp(100px, 22vw, 180px);
+    height: auto;
+    max-height: clamp(180px, 30vh, 280px);
+  }
 
-  /* AXES 3,4,5 — items inline */
+  /* AXES 3/4/5 — items inline */
   .axe-items-tl {
     list-style: none;
     margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0 clamp(8px, 2.5vw, 20px);
   }
   .axe-items-tl li {
     font-size: clamp(14px, 3vw, 24px);
@@ -307,6 +330,14 @@
     color: var(--teal);
     font-weight: 700;
   }
+
+  /* AXES 4 + 5 côte à côte */
+  .axes-row-tl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1.4vh, 14px);
+  }
+  .axes-row-tl .axe-tl { margin-bottom: 0; }
 
   /* VALEUR + FOOTER */
   .section-valeur { padding: 8vh 6vw 4vh; }
@@ -474,7 +505,16 @@
   <div class="axe-tl {{ ax2.criticite }}">
     <div class="axe-title-tl">{{ ax2.nom }}</div>
     <div class="rachis-tl">
-      <svg class="rachis-svg-tl" viewBox="0 0 100 168" xmlns="http://www.w3.org/2000/svg">
+      <div class="echelle-tl left">
+        <ul>
+          {% for lvl in ["T12", "L1", "L2", "L3", "L4", "L5"] %}
+            <li>{{ lvl }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="rachis-center-tl">
+        <div class="rachis-label-tl">Étage sup</div>
+        <svg class="rachis-svg-tl" viewBox="0 0 100 168" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="vert-tl" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#F0EDE8"/>
@@ -511,9 +551,15 @@
         <path d="M 68 140 Q 88 144 86 156 L 72 156 Q 72 150 68 144 Z"
               fill="url(#vert-tl)" stroke="#00D4B4" stroke-width="0.8"/>
       </svg>
-      <ul class="rachis-items-tl">
-        {% for it in ax2["items"] %}<li>{{ it }}</li>{% endfor %}
-      </ul>
+        <div class="rachis-label-tl">Étage inf</div>
+      </div>
+      <div class="echelle-tl right">
+        <ul>
+          {% for lvl in ["L1", "L2", "L3", "L4", "L5", "S1", "Bassin"] %}
+            <li>{{ lvl }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -521,17 +567,28 @@
 
 <!-- SECTION 4 — Axes 3, 4, 5 -->
 <section data-snap="true" class="section-axes">
-  <div class="section-tag">Suite</div>
   <h2 class="section-title-tl">Matériel · antécédent · séjour</h2>
 
-  {% for ax in q.axes[2:] %}
-    <div class="axe-tl {{ ax.criticite }}">
-      <div class="axe-title-tl">{{ ax.nom }}</div>
-      <ul class="axe-items-tl">
-        {% for it in ax["items"] %}<li>{{ it }}</li>{% endfor %}
-      </ul>
-    </div>
-  {% endfor %}
+  {# Axe 3 — pleine largeur #}
+  {% set ax3 = q.axes[2] %}
+  <div class="axe-tl {{ ax3.criticite }}">
+    <div class="axe-title-tl">{{ ax3.nom }}</div>
+    <ul class="axe-items-tl">
+      {% for it in ax3["items"] %}<li>{{ it }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  {# Axes 4 + 5 — côte à côte #}
+  <div class="axes-row-tl">
+    {% for ax in q.axes[3:5] %}
+      <div class="axe-tl {{ ax.criticite }}">
+        <div class="axe-title-tl">{{ ax.nom }}</div>
+        <ul class="axe-items-tl">
+          {% for it in ax["items"] %}<li>{{ it }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
 </section>
 
 
