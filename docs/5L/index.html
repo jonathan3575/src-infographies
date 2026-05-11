@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5L — Programmation chirurgie lombaire · TL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080A0F;
+    --bg2: #0E1117;
+    --bg3: #141820;
+    --teal: #00D4B4;
+    --teal-dim: #00A890;
+    --gold: #F0B429;
+    --gold-dim: #C48F1A;
+    --white: #F0EDE8;
+    --muted: #6B7280;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
+
+  html, body {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: clamp(14px, 3.5vw, 26px);
+    line-height: 1.4;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  section[data-snap="true"] {
+    width: 100%;
+    max-width: 100vw;
+    padding: 6vh 6vw;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 24px);
+    scroll-snap-align: start;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  section[data-snap="true"].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ==========  SECTION 1 — Hero  ========== */
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .logo-tl {
+    width: clamp(48px, 9vw, 88px);
+    height: auto;
+    object-fit: contain;
+  }
+  .topbar-meta {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 22px);
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  [data-zone="header"] {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1vh, 12px);
+  }
+  .questionnaire-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .code-huge {
+    font-family: var(--font-display);
+    font-size: clamp(96px, 26vw, 280px);
+    line-height: 0.85;
+    color: var(--teal);
+    letter-spacing: 1px;
+  }
+  .title-tl {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 7vw, 72px);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  [data-zone="identity"] {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: clamp(12px, 2vh, 20px) clamp(14px, 3vw, 28px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(12px, 3vw, 32px);
+    row-gap: clamp(6px, 1.2vh, 12px);
+  }
+  .identity-cell-tl {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(6px, 1.5vw, 12px);
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .identity-cell-tl .label-tl,
+  .identity-cell-tl .value-tl {
+    font-size: clamp(13px, 3vw, 24px);
+    line-height: 1.2;
+  }
+  .identity-cell-tl .label-tl {
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .identity-cell-tl .value-tl {
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  [data-zone="hero"] {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: clamp(8px, 1.5vh, 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-screenshot {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: var(--bg2);
+    border-radius: 4px;
+  }
+
+  [data-zone="frise"] {
+    background: var(--bg3);
+    padding: clamp(8px, 1.2vh, 12px) clamp(10px, 2.5vw, 20px);
+    border-radius: 4px;
+  }
+  .frise-flow-tl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(4px, 0.8vw, 8px);
+    align-items: center;
+  }
+  .frise-step-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.2vw, 18px);
+    color: var(--muted);
+    padding: clamp(2px, 0.5vh, 5px) clamp(5px, 1.2vw, 10px);
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    line-height: 1;
+  }
+  .frise-step-tl.active {
+    color: var(--bg);
+    background: var(--teal);
+    border-color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ==========  SECTION 2 — Disrupteur  ========== */
+
+  .section-disrupteur {
+    padding: 10vh 6vw;
+  }
+  [data-zone="disrupteur"] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: clamp(8px, 1.5vh, 16px);
+  }
+  .disrupteur-tag-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    color: var(--muted);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    text-transform: uppercase;
+  }
+  .disrupteur-line {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 16vw, 200px);
+    line-height: 0.95;
+    color: var(--gold);
+    letter-spacing: 1px;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  .disrupteur-arrow-tl {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 12vw, 140px);
+    color: var(--white);
+    line-height: 1;
+  }
+  .disrupteur-sec-tl {
+    font-size: clamp(18px, 5vw, 36px);
+    color: var(--muted);
+    margin-top: clamp(20px, 4vh, 60px);
+    line-height: 1.4;
+    max-width: 100%;
+  }
+
+  /* ==========  SECTION 3 — Champs / axes  ========== */
+
+  .section-champs {
+    padding: 8vh 6vw;
+  }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 28px);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .section-title-tl {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 10vw, 80px);
+    line-height: 1;
+    color: var(--teal);
+    letter-spacing: 0.5px;
+    margin-top: clamp(4px, 0.8vh, 12px);
+    margin-bottom: clamp(12px, 2vh, 24px);
+  }
+  .champs-list-tl {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.5vh, 14px);
+  }
+  .champs-card-tl {
+    background: var(--bg2);
+    border-left: clamp(3px, 0.7vw, 6px) solid var(--teal);
+    padding: clamp(10px, 1.8vh, 18px) clamp(14px, 3.5vw, 28px);
+  }
+  .champs-card-tl.critique {
+    border-left-color: var(--gold);
+    background: var(--bg3);
+  }
+  .champs-card-tl.normale { border-left-color: var(--muted); }
+  .champs-card-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 4.5vw, 38px);
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: 0.3px;
+    margin-bottom: clamp(4px, 0.8vh, 8px);
+  }
+  .champs-card-items {
+    font-size: clamp(13px, 3vw, 22px);
+    line-height: 1.35;
+    color: var(--muted);
+  }
+  .champs-card-items strong { color: var(--white); font-weight: 600; }
+
+  .badges-row-tl {
+    margin-top: clamp(14px, 2.5vh, 24px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(6px, 1.5vw, 12px);
+    align-items: center;
+  }
+  .badges-label-tl {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 2vw, 16px);
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-right: clamp(4px, 1vw, 8px);
+  }
+  .badge-tl {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 4vw, 32px);
+    color: var(--teal);
+    background: var(--bg3);
+    border: 1px solid var(--teal-dim);
+    padding: clamp(4px, 0.8vh, 8px) clamp(10px, 2.5vw, 18px);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .encart-special-tl {
+    margin-top: clamp(14px, 2.5vh, 22px);
+    background: rgba(240, 180, 41, 0.10);
+    border-left: clamp(3px, 0.7vw, 6px) solid var(--gold);
+    padding: clamp(14px, 2.5vh, 22px) clamp(14px, 3.5vw, 28px);
+  }
+  .encart-special-tl h3 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 5vw, 40px);
+    color: var(--gold);
+    line-height: 1.05;
+    margin-bottom: clamp(6px, 1vh, 10px);
+    letter-spacing: 0.3px;
+  }
+  .encart-special-tl p {
+    font-size: clamp(14px, 3vw, 22px);
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: clamp(8px, 1.2vh, 12px);
+  }
+  .encart-special-tl ul {
+    list-style: none;
+    margin-bottom: clamp(8px, 1.2vh, 12px);
+  }
+  .encart-special-tl li {
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 2.6vw, 20px);
+    color: var(--white);
+    padding: clamp(4px, 0.8vh, 7px) 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .encart-special-tl li:last-child {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .encart-special-tl .encart-msg-tl {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 5vw, 40px);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 0;
+  }
+
+  /* ==========  SECTION 4 — Pourquoi (gold) + footer  ========== */
+
+  .section-valeur {
+    padding: 8vh 6vw 4vh;
+  }
+  [data-zone="valeur"] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(240, 180, 41, 0.08);
+    border-left: clamp(4px, 1vw, 8px) solid var(--gold);
+    padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 44px);
+  }
+  [data-zone="valeur"] .valeur-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.5vw, 24px);
+    letter-spacing: clamp(2px, 1vw, 6px);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  [data-zone="valeur"] h2 {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 9vw, 70px);
+    line-height: 0.95;
+    color: var(--gold);
+    margin: clamp(4px, 0.8vh, 8px) 0 clamp(14px, 2.5vh, 28px) 0;
+  }
+  [data-zone="valeur"] ul {
+    list-style: none;
+  }
+  [data-zone="valeur"] li {
+    font-size: clamp(14px, 3.2vw, 26px);
+    line-height: 1.4;
+    color: var(--white);
+    padding: clamp(8px, 1.4vh, 14px) 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  [data-zone="valeur"] li:last-child {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  [data-zone="valeur"] li.first-point-tl {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 6.5vw, 48px);
+    line-height: 1.05;
+    color: var(--white);
+    background: rgba(240, 180, 41, 0.18);
+    padding: clamp(14px, 2.5vh, 24px) clamp(14px, 3vw, 28px);
+    margin: 0 0 clamp(8px, 1.5vh, 12px) 0;
+    border-left: clamp(4px, 1vw, 6px) solid var(--gold);
+    border-top: 0;
+  }
+  .note-finale-tl {
+    margin-top: clamp(12px, 2vh, 18px);
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 2.4vw, 20px);
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-align: center;
+    padding: clamp(8px, 1.5vh, 14px) 0;
+    border-top: 1px dashed rgba(255,255,255,0.10);
+    border-bottom: 1px dashed rgba(255,255,255,0.10);
+  }
+
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: clamp(12px, 2vh, 16px);
+    margin-top: clamp(12px, 2vh, 24px);
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-tl-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.5vw, 16px);
+  }
+  .footer-tl-logo {
+    width: clamp(40px, 5vw, 64px);
+    height: auto;
+    object-fit: contain;
+  }
+  .footer-tl-text {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 3.5vw, 28px);
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  .footer-tl-meta {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 2vw, 18px);
+    color: var(--muted);
+    letter-spacing: 1.5px;
+  }
+</style>
+</head>
+<body data-tl-format="1080x1920">
+
+
+<!-- SECTION 1 — Hero -->
+<section data-snap="true" class="section-hero">
+  <div class="topbar">
+    <img src="../assets/brand/logo_src.jpeg" alt="Logo SRC" class="logo-tl">
+    <div class="topbar-meta">#03/12</div>
+  </div>
+
+  <div data-zone="header">
+    <div class="questionnaire-tag">Questionnaire</div>
+    <div class="code-huge">5L</div>
+    <h1 class="title-tl">Programmation chirurgie lombaire</h1>
+  </div>
+
+  <div data-zone="identity">
+    <div class="identity-cell-tl" data-field="etape">
+      <span class="label-tl">Étape</span>
+      <span class="value-tl">Programmation chirurgicale</span>
+    </div>
+    <div class="identity-cell-tl">
+      <span class="label-tl">Durée chir</span>
+      <span class="value-tl">≈ 2 minutes</span>
+    </div>
+      <div class="identity-cell-tl">
+        <span class="label-tl">Chirurgien</span>
+        <span class="value-tl">100%</span>
+      </div>
+  </div>
+
+  <div data-zone="hero">
+      <img src="../assets/screenshots/follow/5L_part1.png" alt="Follow 5L part 1" class="hero-screenshot">
+  </div>
+
+  <div data-zone="frise">
+    <div class="frise-flow-tl">
+        <span class="frise-step-tl">1D</span>
+        <span class="frise-step-tl">2L</span>
+        <span class="frise-step-tl">ODI</span>
+        <span class="frise-step-tl">8L</span>
+        <span class="frise-step-tl">4L</span>
+        <span class="frise-step-tl active">5L</span>
+        <span class="frise-step-tl">6a</span>
+        <span class="frise-step-tl">6b</span>
+        <span class="frise-step-tl">1M</span>
+        <span class="frise-step-tl">3M</span>
+        <span class="frise-step-tl">6M</span>
+        <span class="frise-step-tl">1A</span>
+        <span class="frise-step-tl">2A</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 — Disrupteur -->
+<section data-snap="true" class="section-disrupteur">
+  <div data-zone="disrupteur">
+    <div class="disrupteur-tag-tl">Le chiffre</div>
+      <div class="disrupteur-line">1 page</div>
+      <div class="disrupteur-arrow-tl">→</div>
+      <div class="disrupteur-line">bloc prêt</div>
+    <p class="disrupteur-sec-tl">Ces 4 axes = tout ce dont le bloc a besoin.</p>
+  </div>
+</section>
+
+
+<!-- SECTION 3 — Champs (toutes les sections) + extras -->
+<section data-snap="true" class="section-champs">
+  <div class="section-tag">Pour toi</div>
+  <h2 class="section-title-tl">Tout pour le bloc, sur une page</h2>
+  <ul class="champs-list-tl">
+      <li class="champs-card-tl critique">
+        <div class="champs-card-title">Axe 1 — Voie d&#39;abord</div>
+        <div class="champs-card-items">Postérieure : cure de hernie · libération · fixation · ostéotomie (ponte/OTP) · stab dynamique · vertébroplastie · Postérieure mini-invasive : endo UBE/Mono · percutanée · TLIF · navigation · Antérieure : ALIF 1 niv · ALIF 2 niv · prothèse · hybride · autre — côté G/D · Latérale : LLIF · XLIF · corporectomie — côté G/D · Abord combiné : O/N + séquence (ANT/POST, POST/ANT, LAT/POST, ANT/LAT, POST/ANT/POST) + date 2e temps si différé</div>
+      </li>
+      <li class="champs-card-tl haute">
+        <div class="champs-card-title">Axe 2 — Niveaux instrumentés</div>
+        <div class="champs-card-items">Postérieur : sup L5→T12 / inf S1→L1 ou Bassin · Latéral : sup L1→L5 / inf L2→S1 ou Iliaque · Antérieur : L5S1 → L1L2</div>
+      </li>
+      <li class="champs-card-tl normale">
+        <div class="champs-card-title">Axe 3 — Matériel</div>
+        <div class="champs-card-items">Vis · cages · plaques · prothèses · ciment · Préciser le matériel selon ton protocole habituel.</div>
+      </li>
+      <li class="champs-card-tl haute">
+        <div class="champs-card-title">Axe 4 — Contexte &amp; séjour</div>
+        <div class="champs-card-items">Chir sur région déjà opérée : O/N → si OUI : type (HD/libé, arthrodèse post/ant, autre) + niveau + année + commentaire · Type de séjour : hospitalisation traditionnelle / ambulatoire · Date d&#39;intervention : libre</div>
+      </li>
+  </ul>
+
+
+</section>
+
+
+<!-- SECTION 4 — Pourquoi + footer -->
+<section data-snap="true" class="section-valeur">
+  <div data-zone="valeur">
+    <div class="valeur-tag">Pourquoi ça compte</div>
+    <h2>Cette fiche → dossier de prog chir</h2>
+    <ul>
+        <li class="first-point-tl">Le A4 doit être scannable en 10 secondes par secrétaire + chir.</li>
+        <li>Voie d&#39;abord + niveaux + matériel + contexte : rien ne manque, rien ne traîne.</li>
+        <li>Scoliose : hors 5L, réservée à la série scoliose à venir.</li>
+        <li>Une fois cette case complète, la programmation peut partir au bloc.</li>
+    </ul>
+  </div>
+
+  <div class="note-finale-tl">Cette fiche finit dans le dossier de programmation chirurgicale.</div>
+
+  <div data-zone="footer">
+    <div class="footer-tl-left">
+      <img src="../assets/brand/logo_src.jpeg" alt="Logo SRC" class="footer-tl-logo">
+      <span class="footer-tl-text">Spine Research Community</span>
+    </div>
+    <span class="footer-tl-meta">5L · #03/12 · 2026-05-11</span>
+  </div>
+</section>
+
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    }
+  }, { threshold: 0.25 });
+  document.querySelectorAll('section[data-snap="true"]').forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>
