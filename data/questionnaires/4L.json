@@ -1,0 +1,100 @@
+{
+  "id": "4L",
+  "titre": "Diagnostic lombaire",
+  "sous_titre": "Le diagnostic nécessaire à la chirurgie",
+  "numero_planche": "02",
+  "total_planches": 12,
+  "rachis": "lombaire",
+  "etape_parcours": "Diagnostic préopératoire",
+  "qui_remplit": [
+    {"role": "chirurgien", "support": "Ordi", "pourcentage": 100}
+  ],
+  "duree_estimee_chir": "≈ 1 minute",
+  "screenshot_follow": [
+    "assets/screenshots/follow/4L_part1.png"
+  ],
+  "champs": [
+    {
+      "section": "Hernie discale",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Libération · cure de hernie",
+        "Niveau précis (L4L5, L5S1...) + côté"
+      ]
+    },
+    {
+      "section": "Canal lombaire étroit",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Libération seule",
+        "Libération ± arthrodèse selon instabilité",
+        "Niveaux instrumentés à préciser"
+      ]
+    },
+    {
+      "section": "Spondylolisthésis (dégé. & lytique)",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Libération + arthrodèse",
+        "Niveau du listhésis + grade"
+      ]
+    },
+    {
+      "section": "Discopathie dégénérative invalidante",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Arthrodèse · prothèse · ALIF",
+        "Niveau cible 1 ou 2 étages"
+      ]
+    },
+    {
+      "section": "Instabilité",
+      "qui": "chirurgien",
+      "criticite": "normale",
+      "items": [
+        "Arthrodèse · fixation",
+        "Niveaux mobiles documentés"
+      ]
+    },
+    {
+      "section": "Sténose foraminale isolée",
+      "qui": "chirurgien",
+      "criticite": "normale",
+      "items": [
+        "Libération ciblée (foraminotomie)",
+        "Niveau + côté"
+      ]
+    }
+  ],
+  "disrupteur": {
+    "chiffre": "6",
+    "unite": "DIAGNOSTICS",
+    "phrase_principale": "Le diagnostic fait la chir",
+    "phrase_secondaire": "Voie d'abord, niveaux, matériel, séjour : tout en découle."
+  },
+  "a_quoi_ca_sert": {
+    "titre": "Pourquoi hiérarchiser le diagnostic",
+    "points": [
+      "Le diagnostic conditionne tout : voie d'abord, niveaux, matériel, durée de séjour.",
+      "Ces 6 familles couvrent l'essentiel de la chir lombaire programmée.",
+      "Sans diagnostic clair, pas de programmation : la 5L attend cette case.",
+      "C'est aussi la variable cible des études SRC : sténose vs HD, arthrodèse vs libération."
+    ]
+  },
+  "badges": ["L5S1", "L4L5", "L3L4", "L2L3", "L1L2", "T12L1"],
+  "encart_special": {
+    "titre": "Troubles neuro — décris en clair",
+    "intro": "Le champ neuro est libre dans Follow. La qualité de ta description = la qualité de la programmation chir. Ne te contente pas de cocher.",
+    "exemples": [
+      "Radiculalgie L5 gauche déficitaire 3/5",
+      "Syndrome de la queue de cheval",
+      "Claudication 200 m"
+    ],
+    "message": "Décris : niveau, côté, déficit, périmètre."
+  },
+  "note_finale": "Scoliose dégénérative : exclue de la 4L, réservée à la série scoliose."
+}

@@ -1,4 +1,4 @@
-.PHONY: install 2L 00 all qa qa-00 clean all-planches publish-2L publish-all deploy
+.PHONY: install 2L 00 4L 5L all qa qa-00 clean all-planches publish-2L publish-all deploy
 
 PY := $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python3)
 
@@ -8,8 +8,8 @@ install:
 	$(PY) -m pip install -e .
 	$(PY) -m playwright install chromium
 
-# Pattern rule : make 2L, make 00, etc.
-2L 00:
+# Build une planche : make 2L, make 00, make 4L, make 5L, etc.
+2L 00 4L 5L:
 	$(PY) -m src.render --questionnaire $@
 	$(PY) -m src.export --questionnaire $@ --format print
 	$(PY) -m src.export --questionnaire $@ --format tl
@@ -19,6 +19,10 @@ qa:
 
 qa-00:
 	$(PY) -m src.qa --questionnaire 00
+
+# QA pour n'importe quelle planche : make qa-4L, make qa-5L, ...
+qa-%:
+	$(PY) -m src.qa --questionnaire $*
 
 all-planches:
 	@for p in $(PLANCHES); do echo ">> Building $$p"; $(MAKE) $$p; done

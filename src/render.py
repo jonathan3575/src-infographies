@@ -98,6 +98,9 @@ def render_html(qid: str) -> tuple[Path, Path, int]:
     if q.id == "00":
         print_template_name = "print_a4_manifeste.html.j2"
         tl_template_name = "tl_vertical_manifeste.html.j2"
+    elif q.id in {"4L", "4C", "5L", "5C"}:
+        print_template_name = "print_a4_grid.html.j2"
+        tl_template_name = "tl_vertical_grid.html.j2"
     else:
         print_template_name = "print_a4.html.j2"
         tl_template_name = "tl_vertical.html.j2"

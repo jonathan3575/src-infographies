@@ -27,6 +27,13 @@ class AQuoiCaSert(BaseModel):
     points: list[str]
 
 
+class EncartSpecial(BaseModel):
+    titre: str
+    intro: str
+    exemples: list[str] = Field(default_factory=list)
+    message: str = ""
+
+
 class Questionnaire(BaseModel):
     id: str
     titre: str
@@ -41,3 +48,6 @@ class Questionnaire(BaseModel):
     champs: list[SectionChamps]
     disrupteur: Disrupteur
     a_quoi_ca_sert: AQuoiCaSert
+    badges: list[str] | None = None
+    encart_special: EncartSpecial | None = None
+    note_finale: str | None = None

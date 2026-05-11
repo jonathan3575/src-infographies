@@ -1,0 +1,75 @@
+{
+  "id": "5L",
+  "titre": "Programmation chirurgie lombaire",
+  "sous_titre": "Tout pour le bloc, sur une page",
+  "numero_planche": "03",
+  "total_planches": 12,
+  "rachis": "lombaire",
+  "etape_parcours": "Programmation chirurgicale",
+  "qui_remplit": [
+    {"role": "chirurgien", "support": "Ordi", "pourcentage": 100}
+  ],
+  "duree_estimee_chir": "≈ 2 minutes",
+  "screenshot_follow": [
+    "assets/screenshots/follow/5L_part1.png"
+  ],
+  "champs": [
+    {
+      "section": "Axe 1 — Voie d'abord",
+      "qui": "chirurgien",
+      "criticite": "critique",
+      "items": [
+        "Postérieure : cure de hernie · libération · fixation · ostéotomie (ponte/OTP) · stab dynamique · vertébroplastie",
+        "Postérieure mini-invasive : endo UBE/Mono · percutanée · TLIF · navigation",
+        "Antérieure : ALIF 1 niv · ALIF 2 niv · prothèse · hybride · autre — côté G/D",
+        "Latérale : LLIF · XLIF · corporectomie — côté G/D",
+        "Abord combiné : O/N + séquence (ANT/POST, POST/ANT, LAT/POST, ANT/LAT, POST/ANT/POST) + date 2e temps si différé"
+      ]
+    },
+    {
+      "section": "Axe 2 — Niveaux instrumentés",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Postérieur : sup L5→T12 / inf S1→L1 ou Bassin",
+        "Latéral : sup L1→L5 / inf L2→S1 ou Iliaque",
+        "Antérieur : L5S1 → L1L2"
+      ]
+    },
+    {
+      "section": "Axe 3 — Matériel",
+      "qui": "chirurgien",
+      "criticite": "normale",
+      "items": [
+        "Vis · cages · plaques · prothèses · ciment",
+        "Préciser le matériel selon ton protocole habituel."
+      ]
+    },
+    {
+      "section": "Axe 4 — Contexte & séjour",
+      "qui": "chirurgien",
+      "criticite": "haute",
+      "items": [
+        "Chir sur région déjà opérée : O/N → si OUI : type (HD/libé, arthrodèse post/ant, autre) + niveau + année + commentaire",
+        "Type de séjour : hospitalisation traditionnelle / ambulatoire",
+        "Date d'intervention : libre"
+      ]
+    }
+  ],
+  "disrupteur": {
+    "chiffre": "1",
+    "unite": "PAGE",
+    "phrase_principale": "1 page  →  bloc prêt",
+    "phrase_secondaire": "Ces 4 axes = tout ce dont le bloc a besoin."
+  },
+  "a_quoi_ca_sert": {
+    "titre": "Cette fiche → dossier de prog chir",
+    "points": [
+      "Le A4 doit être scannable en 10 secondes par secrétaire + chir.",
+      "Voie d'abord + niveaux + matériel + contexte : rien ne manque, rien ne traîne.",
+      "Scoliose : hors 5L, réservée à la série scoliose à venir.",
+      "Une fois cette case complète, la programmation peut partir au bloc."
+    ]
+  },
+  "note_finale": "Cette fiche finit dans le dossier de programmation chirurgicale."
+}
