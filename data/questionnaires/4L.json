@@ -1,73 +1,54 @@
 {
   "id": "4L",
   "titre": "Diagnostic lombaire",
-  "sous_titre": "Le diagnostic nécessaire à la chirurgie",
+  "sous_titre": "Le diagnostic indispensable à la chir",
   "numero_planche": "02",
   "total_planches": 12,
   "rachis": "lombaire",
   "etape_parcours": "Diagnostic préopératoire",
   "qui_remplit": [
-    {"role": "chirurgien", "support": "Ordi", "pourcentage": 100}
+    {"role": "chirurgien", "support": "Chir", "pourcentage": 100}
   ],
-  "duree_estimee_chir": "≈ 1 minute",
+  "duree_estimee_chir": "≈ 30 secondes",
   "screenshot_follow": [
     "assets/screenshots/follow/4L_part1.png"
   ],
-  "champs": [
+  "diagnostics_table": [
     {
-      "section": "Hernie discale",
-      "qui": "chirurgien",
-      "criticite": "haute",
-      "items": [
-        "Libération · cure de hernie",
-        "Niveau précis (L4L5, L5S1...) + côté"
-      ]
+      "diagnostic": "Hernie discale",
+      "chirurgies": ["Cure de hernie", "Libération"],
+      "niveau": "L4L5, L5S1… + côté",
+      "criticite": "haute"
     },
     {
-      "section": "Canal lombaire étroit",
-      "qui": "chirurgien",
-      "criticite": "haute",
-      "items": [
-        "Libération seule",
-        "Libération ± arthrodèse selon instabilité",
-        "Niveaux instrumentés à préciser"
-      ]
+      "diagnostic": "Canal lombaire étroit",
+      "chirurgies": ["Libération ± arthrodèse"],
+      "niveau": "Niveaux instrumentés à préciser",
+      "criticite": "haute"
     },
     {
-      "section": "Spondylolisthésis (dégé. & lytique)",
-      "qui": "chirurgien",
-      "criticite": "haute",
-      "items": [
-        "Libération + arthrodèse",
-        "Niveau du listhésis + grade"
-      ]
+      "diagnostic": "Spondylolisthésis (dégé. & lytique)",
+      "chirurgies": ["Libération ± arthrodèse selon instabilité", "Chir antérieure / postérieure"],
+      "niveau": "Niveau instrumenté",
+      "criticite": "haute"
     },
     {
-      "section": "Discopathie dégénérative invalidante",
-      "qui": "chirurgien",
-      "criticite": "haute",
-      "items": [
-        "Arthrodèse · prothèse · ALIF",
-        "Niveau cible 1 ou 2 étages"
-      ]
+      "diagnostic": "Discopathie dégénérative",
+      "chirurgies": ["Arthrodèse / Prothèse / ALIF"],
+      "niveau": "Niveau cible 1 ou 2 étages",
+      "criticite": "haute"
     },
     {
-      "section": "Instabilité",
-      "qui": "chirurgien",
-      "criticite": "normale",
-      "items": [
-        "Arthrodèse · fixation",
-        "Niveaux mobiles documentés"
-      ]
+      "diagnostic": "Pseudarthrose",
+      "chirurgies": ["Fixation puis arthrodèse"],
+      "niveau": "Niveau instrumenté",
+      "criticite": "haute"
     },
     {
-      "section": "Sténose foraminale isolée",
-      "qui": "chirurgien",
-      "criticite": "normale",
-      "items": [
-        "Libération ciblée (foraminotomie)",
-        "Niveau + côté"
-      ]
+      "diagnostic": "Sténose foraminale",
+      "chirurgies": ["Libération ciblée", "Libération + arthrodèse"],
+      "niveau": "Niveau + côté (pour chacune des 2 options)",
+      "criticite": "haute"
     }
   ],
   "disrupteur": {
@@ -87,14 +68,10 @@
   },
   "badges": ["L5S1", "L4L5", "L3L4", "L2L3", "L1L2", "T12L1"],
   "encart_special": {
-    "titre": "Troubles neuro — décris en clair",
-    "intro": "Le champ neuro est libre dans Follow. La qualité de ta description = la qualité de la programmation chir. Ne te contente pas de cocher.",
-    "exemples": [
-      "Radiculalgie L5 gauche déficitaire 3/5",
-      "Syndrome de la queue de cheval",
-      "Claudication 200 m"
-    ],
-    "message": "Décris : niveau, côté, déficit, périmètre."
+    "titre": "Troubles neuro",
+    "intro": "",
+    "exemples": [],
+    "message": "Décris la racine touchée, le côté, l'échelle motrice."
   },
   "note_finale": "Scoliose dégénérative : exclue de la 4L, réservée à la série scoliose."
 }

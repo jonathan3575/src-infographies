@@ -34,6 +34,27 @@ class EncartSpecial(BaseModel):
     message: str = ""
 
 
+class AxeVoie(BaseModel):
+    voie: str
+    items: list[str] = Field(default_factory=list)
+
+
+class Axe(BaseModel):
+    nom: str
+    sous_titre: str = ""
+    criticite: Literal["normale", "haute", "critique"] = "normale"
+    voies: list[AxeVoie] | None = None
+    items: list[str] | None = None
+    schema_rachis: bool = False
+
+
+class DiagLine(BaseModel):
+    diagnostic: str
+    chirurgies: list[str]
+    niveau: str = ""
+    criticite: Literal["normale", "haute", "critique"] = "haute"
+
+
 class Questionnaire(BaseModel):
     id: str
     titre: str
@@ -45,9 +66,11 @@ class Questionnaire(BaseModel):
     qui_remplit: list[QuiRemplit]
     duree_estimee_chir: str
     screenshot_follow: list[str]
-    champs: list[SectionChamps]
+    champs: list[SectionChamps] = Field(default_factory=list)
     disrupteur: Disrupteur
     a_quoi_ca_sert: AQuoiCaSert
     badges: list[str] | None = None
     encart_special: EncartSpecial | None = None
     note_finale: str | None = None
+    diagnostics_table: list[DiagLine] | None = None
+    axes: list[Axe] | None = None

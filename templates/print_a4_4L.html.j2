@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{{ q.id }} — {{ q.titre }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --src-navy: #1E2D3D;
+    --action: #00A890;
+    --critical: #C48F1A;
+    --passive: #B8BEC7;
+    --cream: #F8F6F1;
+    --text: #0E1117;
+    --muted-text: #5B6470;
+    --border: #E5E2DB;
+
+    --title-size: 56pt;
+    --body-size: 10pt;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  @page { size: A4 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: 1.3;
+  }
+
+  .page { display: flex; flex-direction: column; gap: 1.4mm; }
+
+  /* HEADER */
+  [data-zone="header"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 1.8mm 4mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4mm;
+    align-items: center;
+    border-radius: 2mm;
+  }
+  .logo-chip {
+    background: var(--cream);
+    padding: 1mm;
+    border-radius: 1.5mm;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo {
+    width: 14mm; height: 14mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .header-text { display: flex; flex-direction: column; gap: 0.2mm; }
+  .header-code {
+    font-family: var(--font-display);
+    font-size: 28pt;
+    color: var(--action);
+    letter-spacing: 1pt;
+    line-height: 0.95;
+  }
+  .header-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 15pt;
+    color: var(--cream);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  .header-sub {
+    margin: 0.4mm 0 0 0;
+    font-size: 10pt;
+    color: var(--passive);
+    font-style: italic;
+  }
+
+  /* IDENTITY */
+  [data-zone="identity"] {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 5mm;
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1.4mm 4mm;
+    align-items: center;
+  }
+  .identity-cell .label {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-right: 2mm;
+  }
+  .identity-cell strong { font-size: 11pt; color: var(--src-navy); }
+  .identity-qui { display: flex; gap: 4mm; flex-wrap: wrap; justify-content: flex-end; }
+  .qr-pill {
+    font-size: 10pt;
+    color: var(--text);
+    border-left: 1.2mm solid var(--action);
+    padding-left: 2mm;
+  }
+
+  /* HERO — photo pleine largeur */
+  [data-zone="hero"] {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1.2mm;
+    overflow: hidden;
+  }
+  .screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 36mm;
+    object-fit: contain;
+    border-radius: 1.5mm;
+  }
+
+  /* DISRUPTEUR */
+  [data-zone="disrupteur"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 2mm 5mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5mm;
+    align-items: center;
+    border-radius: 2mm;
+  }
+  .disrupteur-num {
+    font-family: var(--font-display);
+    font-size: 38pt;
+    line-height: 0.85;
+    color: var(--critical);
+  }
+  .disrupteur-unit {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--passive);
+    letter-spacing: 1pt;
+  }
+  .disrupteur-main {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 20pt;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .disrupteur-sec {
+    margin: 0.6mm 0 0 0;
+    font-size: 10pt;
+    color: var(--passive);
+  }
+
+  /* TABLEAU DIAGNOSTIQUE — 6 lignes color-coded */
+  .diag-table {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    overflow: hidden;
+  }
+  .diag-row {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    border-bottom: 0.2mm solid var(--border);
+  }
+  .diag-row:last-child { border-bottom: 0; }
+  .diag-cell {
+    padding: 1.6mm 2.5mm;
+    display: flex;
+    align-items: center;
+    line-height: 1.25;
+  }
+  .diag-cell.diagnostic {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    color: var(--critical);
+    letter-spacing: 0.3pt;
+    background: rgba(196, 143, 26, 0.06);
+    border-right: 0.5mm solid var(--critical);
+  }
+  .diag-cell.chirurgies {
+    font-size: 10pt;
+    color: var(--action);
+    font-weight: 600;
+    background: rgba(0, 168, 144, 0.04);
+    border-right: 0.5mm solid var(--action);
+  }
+  .diag-cell.chirurgies ul {
+    margin: 0; padding: 0; list-style: none;
+  }
+  .diag-cell.chirurgies li {
+    padding: 0.1mm 0;
+  }
+  .diag-cell.niveau {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--src-navy);
+  }
+  .diag-header {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    background: var(--src-navy);
+    color: var(--cream);
+  }
+  .diag-header div {
+    padding: 1mm 2.5mm;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+  }
+  .diag-header .h-diag { color: var(--critical); }
+  .diag-header .h-chir { color: var(--action); }
+  .diag-header .h-niv  { color: var(--passive); }
+
+  /* ENCART NEURO réduit */
+  .encart-neuro {
+    background: rgba(196, 143, 26, 0.10);
+    border-left: 1.5mm solid var(--critical);
+    border-radius: 0 2mm 2mm 0;
+    padding: 1.6mm 3mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3mm;
+    align-items: center;
+  }
+  .encart-neuro h3 {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    color: var(--critical);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.3pt;
+    white-space: nowrap;
+  }
+  .encart-neuro .encart-message {
+    font-family: var(--font-display);
+    font-size: 12pt;
+    color: var(--src-navy);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  /* BADGES NIVEAUX */
+  .badges-row {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1.2mm 3mm;
+    display: flex;
+    align-items: center;
+    gap: 1.8mm;
+    flex-wrap: wrap;
+  }
+  .badges-label {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-right: 1mm;
+  }
+  .badge {
+    font-family: var(--font-display);
+    font-size: 11pt;
+    color: var(--src-navy);
+    background: var(--cream);
+    border: 0.3mm solid var(--src-navy);
+    border-radius: 1.5mm;
+    padding: 0.4mm 2.4mm;
+    line-height: 1.05;
+    letter-spacing: 0.5pt;
+  }
+
+  /* VALEUR */
+  [data-zone="valeur"] {
+    background: rgba(196, 143, 26, 0.08);
+    border-left: 2mm solid var(--critical);
+    border-radius: 0 2mm 2mm 0;
+    padding: 1.6mm 4mm;
+  }
+  [data-zone="valeur"] h2 {
+    margin: 0 0 0.8mm 0;
+    font-family: var(--font-display);
+    font-size: 14pt;
+    color: var(--critical);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  [data-zone="valeur"] ul { margin: 0; padding-left: 4mm; }
+  [data-zone="valeur"] li {
+    font-size: 10pt;
+    margin-bottom: 0.3mm;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  [data-zone="valeur"] li.first-point {
+    font-family: var(--font-display);
+    font-size: 12pt;
+    font-weight: 600;
+    color: var(--src-navy);
+    line-height: 1.05;
+    list-style: none;
+    margin-left: -4mm;
+    padding: 0.8mm 2.5mm;
+    background: var(--cream);
+    border-left: 2mm solid var(--critical);
+    border-radius: 0 1.5mm 1.5mm 0;
+    margin-bottom: 0.8mm;
+  }
+
+  .note-finale {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+    text-align: center;
+    padding: 0.6mm 0;
+    border-top: 0.2mm dashed var(--border);
+    border-bottom: 0.2mm dashed var(--border);
+  }
+
+  /* FRISE */
+  [data-zone="frise"] {
+    border-top: 0.2mm solid var(--border);
+    border-bottom: 0.2mm solid var(--border);
+    padding: 1mm 0;
+  }
+  .frise-title {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-bottom: 0.8mm;
+  }
+  .frise-grid {
+    display: grid;
+    grid-template-columns: auto 4mm 1fr;
+    gap: 0.6mm 2mm;
+    align-items: center;
+  }
+  .frise-pre {
+    grid-column: 1 / 4;
+    display: flex; gap: 1.5mm; align-items: center;
+    margin-bottom: 0.6mm;
+  }
+  .frise-pre::after { content: ""; flex: 1; height: 0.3mm; background: var(--passive); }
+  .branch-label {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    white-space: nowrap;
+  }
+  .branch-arrow {
+    text-align: center; color: var(--passive);
+    font-family: var(--font-mono);
+    font-size: 11pt; line-height: 1;
+  }
+  .branch-line { display: flex; gap: 1.2mm; align-items: center; flex-wrap: wrap; }
+  .frise-step {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 1mm;
+    padding: 0.5mm 1.8mm;
+    color: var(--muted-text);
+    line-height: 1.1;
+  }
+  .frise-step.active {
+    background: var(--action);
+    color: white;
+    border-color: var(--action);
+    font-weight: 700;
+  }
+  .frise-step.active::before { content: "▸ "; color: var(--cream); }
+  .branch-line.op .frise-step { border-left: 0.6mm solid var(--action); }
+  .branch-line.non_op .frise-step { border-left: 0.6mm solid var(--passive); }
+
+  /* FOOTER */
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0.2mm solid var(--border);
+    padding-top: 1mm;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+  }
+  .footer-left { display: flex; align-items: center; gap: 2mm; }
+  .logo-mini {
+    width: 6mm; height: 6mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  {% set rachis_steps = parcours[q.rachis] if q.rachis in parcours else parcours.get("lombaire", []) %}
+
+  <header data-zone="header">
+    <div class="logo-chip">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo">
+    </div>
+    <div class="header-text">
+      <div class="header-code">QUESTIONNAIRE {{ q.id }}</div>
+      <h1 class="header-title">{{ q.titre }}</h1>
+      <p class="header-sub">{{ q.sous_titre }}</p>
+    </div>
+  </header>
+
+  <section data-zone="identity">
+    <div class="identity-cell">
+      <span class="label">Étape</span>
+      <strong>{{ q.etape_parcours }}</strong>
+    </div>
+    <div class="identity-cell">
+      <span class="label">Durée chir</span>
+      <strong>{{ q.duree_estimee_chir }}</strong>
+    </div>
+    <div class="identity-qui">
+      {% for qr in q.qui_remplit %}
+        <div class="qr-pill">
+          <strong>{{ qr.role|capitalize }}</strong> · {{ qr.pourcentage }}%
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section data-zone="hero" data-screenshot-area-min="35">
+    {% for path in abs_screenshots %}
+      <img src="{{ path }}" alt="Follow {{ q.id }} part {{ loop.index }}" class="screenshot">
+    {% endfor %}
+  </section>
+
+  <section data-zone="disrupteur">
+    <div>
+      <div class="disrupteur-num">{{ q.disrupteur.chiffre }}</div>
+      <div class="disrupteur-unit">{{ q.disrupteur.unite }}</div>
+    </div>
+    <div>
+      <p class="disrupteur-main">{{ q.disrupteur.phrase_principale }}</p>
+      <p class="disrupteur-sec">{{ q.disrupteur.phrase_secondaire }}</p>
+    </div>
+  </section>
+
+  <div class="diag-table">
+    <div class="diag-header">
+      <div class="h-diag">Diagnostic</div>
+      <div class="h-chir">Chirurgies associées</div>
+      <div class="h-niv">Niveau</div>
+    </div>
+    {% for d in q.diagnostics_table %}
+      <div class="diag-row">
+        <div class="diag-cell diagnostic">{{ d.diagnostic }}</div>
+        <div class="diag-cell chirurgies">
+          <ul>
+            {% for c in d.chirurgies %}<li>{{ c }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div class="diag-cell niveau">{{ d.niveau }}</div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if q.encart_special %}
+  <section class="encart-neuro">
+    <h3>{{ q.encart_special.titre }}</h3>
+    <p class="encart-message">{{ q.encart_special.message }}</p>
+  </section>
+  {% endif %}
+
+  {% if q.badges %}
+  <section class="badges-row">
+    <span class="badges-label">Niveau diagnostic</span>
+    {% for b in q.badges %}<span class="badge">{{ b }}</span>{% endfor %}
+  </section>
+  {% endif %}
+
+  <section data-zone="valeur">
+    <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+    <ul>
+      {% for p in q.a_quoi_ca_sert.points %}
+        <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% if q.note_finale %}
+  <div class="note-finale">{{ q.note_finale }}</div>
+  {% endif %}
+
+  <section data-zone="frise">
+    <div class="frise-title" data-field="etape">Position dans ton parcours patient — {{ q.rachis }}</div>
+    <div class="frise-grid">
+      <div class="frise-pre">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") is none %}
+            <span class="frise-step{% if step.get('highlight') %} active{% endif %}">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="branch-label">Non opéré</div>
+      <div class="branch-arrow">↗</div>
+      <div class="branch-line non_op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "non_op" %}
+            <span class="frise-step">{{ step.id }} · {{ step.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="branch-label">Opéré</div>
+      <div class="branch-arrow">↘</div>
+      <div class="branch-line op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "op" %}
+            <span class="frise-step{% if step.id == q.id %} active{% endif %}">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer data-zone="footer">
+    <div class="footer-left">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo-mini">
+      <span>Spine Research Community</span>
+    </div>
+    <span>{{ q.id }} · planche #{{ q.numero_planche }}/{{ q.total_planches }} · {{ today }}</span>
+  </footer>
+
+</div>
+</body>
+</html>

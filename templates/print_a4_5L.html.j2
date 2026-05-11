@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{{ q.id }} — {{ q.titre }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --src-navy: #1E2D3D;
+    --action: #00A890;
+    --critical: #C48F1A;
+    --passive: #B8BEC7;
+    --cream: #F8F6F1;
+    --text: #0E1117;
+    --muted-text: #5B6470;
+    --border: #E5E2DB;
+
+    --title-size: 56pt;
+    --body-size: 10pt;
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  @page { size: A4 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: 1.3;
+  }
+
+  .page { display: flex; flex-direction: column; gap: 1.3mm; }
+
+  /* HEADER */
+  [data-zone="header"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 1.6mm 4mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4mm;
+    align-items: center;
+    border-radius: 2mm;
+  }
+  .logo-chip {
+    background: var(--cream);
+    padding: 1mm;
+    border-radius: 1.5mm;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo {
+    width: 13mm; height: 13mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .header-text { display: flex; flex-direction: column; gap: 0.2mm; }
+  .header-code {
+    font-family: var(--font-display);
+    font-size: 26pt;
+    color: var(--action);
+    letter-spacing: 1pt;
+    line-height: 0.95;
+  }
+  .header-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 14pt;
+    color: var(--cream);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  .header-sub {
+    margin: 0.3mm 0 0 0;
+    font-size: 10pt;
+    color: var(--passive);
+    font-style: italic;
+  }
+
+  /* IDENTITY */
+  [data-zone="identity"] {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 5mm;
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1.2mm 4mm;
+    align-items: center;
+  }
+  .identity-cell .label {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-right: 2mm;
+  }
+  .identity-cell strong { font-size: 11pt; color: var(--src-navy); }
+  .identity-qui { display: flex; gap: 4mm; flex-wrap: wrap; justify-content: flex-end; }
+  .qr-pill {
+    font-size: 10pt;
+    color: var(--text);
+    border-left: 1.2mm solid var(--action);
+    padding-left: 2mm;
+  }
+
+  /* HERO pleine largeur */
+  [data-zone="hero"] {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1mm;
+    overflow: hidden;
+  }
+  .screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 28mm;
+    object-fit: contain;
+    border-radius: 1.5mm;
+  }
+
+  /* DISRUPTEUR */
+  [data-zone="disrupteur"] {
+    background: var(--src-navy);
+    color: var(--cream);
+    padding: 1.6mm 5mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5mm;
+    align-items: center;
+    border-radius: 2mm;
+  }
+  .disrupteur-num {
+    font-family: var(--font-display);
+    font-size: 34pt;
+    line-height: 0.85;
+    color: var(--critical);
+  }
+  .disrupteur-unit {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--passive);
+    letter-spacing: 1pt;
+  }
+  .disrupteur-main {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 18pt;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .disrupteur-sec {
+    margin: 0.5mm 0 0 0;
+    font-size: 10pt;
+    color: var(--passive);
+  }
+
+  /* AXE — bloc générique soft-corner */
+  .axe {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 2mm;
+    padding: 1.4mm 2.5mm;
+    overflow: hidden;
+  }
+  .axe.haute   { border-top: 0.7mm solid var(--action); }
+  .axe.critique{ border-top: 0.7mm solid var(--critical); background: rgba(196, 143, 26, 0.04); }
+  .axe.normale { border-top: 0.7mm solid var(--passive); }
+  .axe-head {
+    display: flex; align-items: baseline; gap: 3mm;
+    margin-bottom: 0.6mm;
+  }
+  .axe-title {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    color: var(--src-navy);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.3pt;
+  }
+  .axe-sub {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+  }
+
+  /* AXE 1 — voies hiérarchisées */
+  .axe-voies {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 1.5mm;
+    margin-top: 0.6mm;
+  }
+  .voie-card {
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 1.5mm;
+    padding: 1.2mm 1.8mm;
+  }
+  .voie-name {
+    font-family: var(--font-display);
+    font-size: 22pt;
+    color: var(--action);
+    line-height: 0.9;
+    letter-spacing: 1pt;
+    margin: 0 0 0.6mm 0;
+    padding-bottom: 0.6mm;
+    border-bottom: 0.4mm solid var(--action);
+  }
+  .voie-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .voie-items li {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: var(--text);
+    line-height: 1.25;
+    padding: 0.2mm 0;
+  }
+
+  /* AXE 2 — schéma rachis + items */
+  .axe-rachis {
+    display: grid;
+    grid-template-columns: 28mm 1fr;
+    gap: 3mm;
+    align-items: center;
+    margin-top: 0.4mm;
+  }
+  .rachis-svg {
+    width: 28mm;
+    height: 36mm;
+  }
+  .rachis-items {
+    margin: 0; padding: 0; list-style: none;
+  }
+  .rachis-items li {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--src-navy);
+    padding: 0.4mm 0;
+    line-height: 1.25;
+    border-bottom: 0.15mm dashed var(--border);
+  }
+  .rachis-items li:last-child { border-bottom: 0; }
+
+  /* AXE 3/4/5 — simple items inline */
+  .axe-items {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 4mm;
+  }
+  .axe-items li {
+    font-size: 10pt;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .axe-items li::before {
+    content: "▹";
+    color: var(--action);
+    margin-right: 1.5mm;
+    font-weight: 700;
+  }
+
+  /* AXES 3+4+5 sur une rangée 2col-1col */
+  .axes-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3mm;
+  }
+
+  /* VALEUR */
+  [data-zone="valeur"] {
+    background: rgba(196, 143, 26, 0.08);
+    border-left: 2mm solid var(--critical);
+    border-radius: 0 2mm 2mm 0;
+    padding: 1.4mm 4mm;
+  }
+  [data-zone="valeur"] h2 {
+    margin: 0 0 0.6mm 0;
+    font-family: var(--font-display);
+    font-size: 13pt;
+    color: var(--critical);
+    letter-spacing: 0.5pt;
+    line-height: 1;
+  }
+  [data-zone="valeur"] ul { margin: 0; padding-left: 4mm; }
+  [data-zone="valeur"] li {
+    font-size: 10pt;
+    margin-bottom: 0.2mm;
+    line-height: 1.22;
+    color: var(--text);
+  }
+  [data-zone="valeur"] li.first-point {
+    font-family: var(--font-display);
+    font-size: 12pt;
+    font-weight: 600;
+    color: var(--src-navy);
+    line-height: 1.05;
+    list-style: none;
+    margin-left: -4mm;
+    padding: 0.7mm 2.5mm;
+    background: var(--cream);
+    border-left: 2mm solid var(--critical);
+    border-radius: 0 1.5mm 1.5mm 0;
+    margin-bottom: 0.6mm;
+  }
+
+  .note-finale {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+    text-align: center;
+    padding: 0.6mm 0;
+    border-top: 0.2mm dashed var(--border);
+    border-bottom: 0.2mm dashed var(--border);
+  }
+
+  /* FRISE */
+  [data-zone="frise"] {
+    border-top: 0.2mm solid var(--border);
+    border-bottom: 0.2mm solid var(--border);
+    padding: 0.8mm 0;
+  }
+  .frise-title {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    letter-spacing: 0.5pt;
+    margin-bottom: 0.6mm;
+  }
+  .frise-grid {
+    display: grid;
+    grid-template-columns: auto 4mm 1fr;
+    gap: 0.5mm 2mm;
+    align-items: center;
+  }
+  .frise-pre {
+    grid-column: 1 / 4;
+    display: flex; gap: 1.5mm; align-items: center;
+    margin-bottom: 0.5mm;
+  }
+  .frise-pre::after { content: ""; flex: 1; height: 0.3mm; background: var(--passive); }
+  .branch-label {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    white-space: nowrap;
+  }
+  .branch-arrow {
+    text-align: center; color: var(--passive);
+    font-family: var(--font-mono);
+    font-size: 11pt; line-height: 1;
+  }
+  .branch-line { display: flex; gap: 1.2mm; align-items: center; flex-wrap: wrap; }
+  .frise-step {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    background: white;
+    border: 0.2mm solid var(--border);
+    border-radius: 1mm;
+    padding: 0.5mm 1.8mm;
+    color: var(--muted-text);
+    line-height: 1.1;
+  }
+  .frise-step.active {
+    background: var(--action);
+    color: white;
+    border-color: var(--action);
+    font-weight: 700;
+  }
+  .frise-step.active::before { content: "▸ "; color: var(--cream); }
+  .branch-line.op .frise-step { border-left: 0.6mm solid var(--action); }
+  .branch-line.non_op .frise-step { border-left: 0.6mm solid var(--passive); }
+
+  /* FOOTER */
+  [data-zone="footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0.2mm solid var(--border);
+    padding-top: 0.8mm;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-text);
+    letter-spacing: 0.3pt;
+  }
+  .footer-left { display: flex; align-items: center; gap: 2mm; }
+  .logo-mini {
+    width: 6mm; height: 6mm;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  {% set rachis_steps = parcours[q.rachis] if q.rachis in parcours else parcours.get("lombaire", []) %}
+
+  <header data-zone="header">
+    <div class="logo-chip">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo">
+    </div>
+    <div class="header-text">
+      <div class="header-code">QUESTIONNAIRE {{ q.id }}</div>
+      <h1 class="header-title">{{ q.titre }}</h1>
+      <p class="header-sub">{{ q.sous_titre }}</p>
+    </div>
+  </header>
+
+  <section data-zone="identity">
+    <div class="identity-cell">
+      <span class="label">Étape</span>
+      <strong>{{ q.etape_parcours }}</strong>
+    </div>
+    <div class="identity-cell">
+      <span class="label">Durée chir</span>
+      <strong>{{ q.duree_estimee_chir }}</strong>
+    </div>
+    <div class="identity-qui">
+      {% for qr in q.qui_remplit %}
+        <div class="qr-pill">
+          <strong>{{ qr.role|capitalize }}</strong> · {{ qr.pourcentage }}%
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section data-zone="hero" data-screenshot-area-min="35">
+    {% for path in abs_screenshots %}
+      <img src="{{ path }}" alt="Follow {{ q.id }} part {{ loop.index }}" class="screenshot">
+    {% endfor %}
+  </section>
+
+  <section data-zone="disrupteur">
+    <div>
+      <div class="disrupteur-num">{{ q.disrupteur.chiffre }}</div>
+      <div class="disrupteur-unit">{{ q.disrupteur.unite }}</div>
+    </div>
+    <div>
+      <p class="disrupteur-main">{{ q.disrupteur.phrase_principale }}</p>
+      <p class="disrupteur-sec">{{ q.disrupteur.phrase_secondaire }}</p>
+    </div>
+  </section>
+
+  {# AXE 1 (critique) — voies hiérarchisées #}
+  {% set ax1 = q.axes[0] %}
+  <div class="axe {{ ax1.criticite }}">
+    <div class="axe-head">
+      <h3 class="axe-title">{{ ax1.nom }}</h3>
+      {% if ax1.sous_titre %}<span class="axe-sub">{{ ax1.sous_titre }}</span>{% endif %}
+    </div>
+    <div class="axe-voies">
+      {% for v in ax1.voies %}
+        <div class="voie-card">
+          <div class="voie-name">{{ v.voie }}</div>
+          <ul class="voie-items">
+            {% for it in v["items"] %}<li>{{ it }}</li>{% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# AXE 2 — rachis SVG + items #}
+  {% set ax2 = q.axes[1] %}
+  <div class="axe {{ ax2.criticite }}">
+    <div class="axe-head">
+      <h3 class="axe-title">{{ ax2.nom }}</h3>
+    </div>
+    <div class="axe-rachis">
+      <svg class="rachis-svg" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vert" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F8F6F1"/>
+            <stop offset="100%" stop-color="#E5E2DB"/>
+          </linearGradient>
+        </defs>
+        {# Liste niveaux du haut (T12) vers le bas (L5/S1) #}
+        {% set levels = ["T12", "L1", "L2", "L3", "L4", "L5", "S1"] %}
+        {% for lvl in levels %}
+          {% set y = 8 + loop.index0 * 17 %}
+          <rect x="32" y="{{ y }}" width="36" height="11" rx="2.4" ry="2.4"
+                fill="url(#vert)" stroke="#1E2D3D" stroke-width="0.6"/>
+          {# disque sous chaque vertèbre sauf la dernière #}
+          {% if not loop.last %}
+            <rect x="36" y="{{ y + 11 }}" width="28" height="4" rx="1.5" ry="1.5"
+                  fill="#00A890" opacity="0.55"/>
+          {% endif %}
+          <text x="74" y="{{ y + 8 }}" font-family="Space Mono, monospace"
+                font-size="6.5" fill="#1E2D3D">{{ lvl }}</text>
+        {% endfor %}
+      </svg>
+      <ul class="rachis-items">
+        {% for it in ax2["items"] %}<li>{{ it }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {# AXES 3, 4, 5 — rangée 2col puis 1col #}
+  <div class="axes-row">
+    {% for ax in q.axes[2:4] %}
+      <div class="axe {{ ax.criticite }}">
+        <div class="axe-head">
+          <h3 class="axe-title">{{ ax.nom }}</h3>
+        </div>
+        <ul class="axe-items">
+          {% for it in ax["items"] %}<li>{{ it }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% set ax5 = q.axes[4] %}
+  <div class="axe {{ ax5.criticite }}">
+    <div class="axe-head">
+      <h3 class="axe-title">{{ ax5.nom }}</h3>
+    </div>
+    <ul class="axe-items">
+      {% for it in ax5["items"] %}<li>{{ it }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  <section data-zone="valeur">
+    <h2>{{ q.a_quoi_ca_sert.titre }}</h2>
+    <ul>
+      {% for p in q.a_quoi_ca_sert.points %}
+        <li{% if loop.first %} class="first-point"{% endif %}>{{ p }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% if q.note_finale %}
+  <div class="note-finale">{{ q.note_finale }}</div>
+  {% endif %}
+
+  <section data-zone="frise">
+    <div class="frise-title" data-field="etape">Position dans ton parcours patient — {{ q.rachis }}</div>
+    <div class="frise-grid">
+      <div class="frise-pre">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") is none %}
+            <span class="frise-step{% if step.get('highlight') %} active{% endif %}">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="branch-label">Non opéré</div>
+      <div class="branch-arrow">↗</div>
+      <div class="branch-line non_op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "non_op" %}
+            <span class="frise-step">{{ step.id }} · {{ step.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="branch-label">Opéré</div>
+      <div class="branch-arrow">↘</div>
+      <div class="branch-line op">
+        {% for step in rachis_steps %}
+          {% if step.get("branch") == "op" %}
+            <span class="frise-step{% if step.id == q.id %} active{% endif %}">{{ step.id }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer data-zone="footer">
+    <div class="footer-left">
+      <img src="{{ logo_path }}" alt="Logo SRC" class="logo-mini">
+      <span>Spine Research Community</span>
+    </div>
+    <span>{{ q.id }} · planche #{{ q.numero_planche }}/{{ q.total_planches }} · {{ today }}</span>
+  </footer>
+
+</div>
+</body>
+</html>
